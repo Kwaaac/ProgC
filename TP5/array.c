@@ -1,8 +1,8 @@
-#include "library.h"
+#include "array.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "read.h"
-#include "library.h"
+#include "../lib/read.h"
+#include "array.h"
 
 /* Allocate memory for an array which can contain `size`
    integers. The returned C array has memory for an extra last
@@ -204,7 +204,7 @@ int *merge_sorted_arrays(int *first, int *second) {
 }
 
 void split_arrays(int *array, int **first, int **second) {
-    int i, j;
+    int i;
     int size_array = array_size(array);
     int size_second = size_array / 2;
     int size_first = size_array - size_second;

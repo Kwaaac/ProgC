@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "library.h"
+#include "array.h"
 
 /* An empty main to test the compilation of the allocation and free
    functions. */
 int main(int argc, char *argv[]) {
 
     srand(time(NULL));
+
 
     /*
     int* first = allocate_integer_array(4);
