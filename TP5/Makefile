@@ -3,7 +3,7 @@ CFLAGS=-Wall -ansi -pedantic -g
 OBJ=main.o array.o read.o
 LIB=../lib
 
-exe:
+exe: $(OBJ)
 	$(CC) -o exe $(OBJ) $(CFLAGS)
 
 main.o: main.c array.h $(LIB)/read.h
