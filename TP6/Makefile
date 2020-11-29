@@ -1,21 +1,22 @@
 CC=gcc
 CFLAGS=-Wall -ansi -pedantic -g
-OBJ=main.o read.o
+OBJ= main.o read.o
 LIB= ../lib
 
-secret: $(OBJ)
-	$(CC) -o secret $(OBJ) $(CFLAGS)
+exe: $(OBJ)
+	$(CC) -o exe $(OBJ) $(CFLAGS)
 
 main.o: main.c $(LIB)/read.h
 	$(CC) -c main.c -o main.o $(CFLAGS)
 
 read.o: $(LIB)/read.c $(LIB)/read.h
-	$(CC) -c read.c -o read.o $(CFLAGS)
+	$(CC) -c $(LIB)/read.c -o read.o $(CFLAGS)
 
 run:
-	./secret
+	./exe
 
 clean:
 	rm -f *.o
-	rm -f secret
+	rm -f exe
 	rm -f *~
+
