@@ -15,6 +15,21 @@ sudoku.o: sudoku.c sudoku.h
 in_out.o: in_out.c in_out.h
 	$(CC) -c in_out.c $(CFLAGS)
 
+run_g1:
+	./sudoku data/grid1.txt
+
+run_g2:
+	./sudoku data/grid1.txt
+
+run_g3:
+	./sudoku data/grid1.txt
+
+run_g4:
+	./sudoku data/grid1.txt
+
+run_g5:
+	./sudoku data/grid1.txt
+
 clean: 
 	rm -f *.o
 	rm -f *~
