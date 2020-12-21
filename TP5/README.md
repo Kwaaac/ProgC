@@ -18,6 +18,6 @@ Elle permet simplement d'afficher les étapes pour les fonctions de tri fusion<b
 `1` ==> Elle les affiche<br>
 `0` ==> Elle ne les affiche pas.
 
-##Remerciements
+## Remerciements
 Petit merci à Mehdi qui m'a fait remarquer des bétises dans mon code.
 
