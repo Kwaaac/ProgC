@@ -12,7 +12,7 @@ ajouter et proposer une request pour l'ajouter au TP via un pti push.
 pour les prochains eventuels reviewer, il pourront aussi les avoir
 <br> **Tout benef n'est-ce pas ?**
 
-###Variable `DEBUG`
+### Variable `DEBUG`
 Vous trouverez dans array.h une variable `DEBUG` à initialiser à 1 ou 0<br>
 Elle permet simplement d'afficher les étapes pour les fonctions de tri fusion<br>
 `1` ==> Elle les affiche<br>
