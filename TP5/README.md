@@ -2,22 +2,28 @@
 
 ## Petit readme à l'attention des reviewers
 
-### Makefile et tests
+### Makefile
 
-Vous pouvez trouver un petit Makefile au sein de ce TP, n'hésitez pas à l'utiliser ça sera plus simple pour, il va
-lancer le main.c qui contient des test primaires.
-<br>Si jamais, au détour d'un couloir sombre d'aventure du C, vous décidez d'ajouter des test, n'hésitez pas à les
-ajouter et proposer une request pour l'ajouter au TP via un pti push.
-<br>Déjà c'est super sympas, parce que si ce sont des test qui font planter, je pourrais les réutiliser pour test, et
-pour les prochains eventuels reviewer, il pourront aussi les avoir
-<br> **Tout benef n'est-ce pas ?**
+Vous trouverez un makefile au sein du projet. Pour pouvoir compiler le projet il faut bien avoir la librairie read.c/read.h qui vient avec tout mes projets.<br>
+Pour compiler le projet voici les deux commandes qui peut-être utilisé:<br>
+`make` --> Clean, compile puis execute le programme sans la notion d'utilisateur (voir chapitre `Test`).<br>
+`make user` --> Clean, compule puis execute le programme avec la notion d'utilisateur (voir chapitre `Test`).<br>
 
-### Variable `DEBUG`
-Vous trouverez dans array.h une variable `DEBUG` à initialiser à 1 ou 0<br>
-Elle permet simplement d'afficher les étapes pour les fonctions de tri fusion<br>
-`1` ==> Elle les affiche<br>
-`0` ==> Elle ne les affiche pas.
+#### Desciption du makefile
+`run`       --> Clean, compile puis execute le programme sans la notion d'utilisateur<br>
+`user`      --> Clean, compule puis execute le programme avec la notion d'utilisateur.<br>
+`exe`       --> Compile le programme<br>
+`main.o`    --> Compile le main.c<br>
+`array.o`   --> Compile le array.c<br>
+`read.o`    --> Compile la librairie read.c<br>
+`clean`     --> Clean le projet<br>
+### Test
+L'objectif du TP étant d'avoir une librairie de fonction pour créer et effectué des actions avec des tableaux, l'execution du programme lance des tests.<br>
+Pour la revue il vous sera nécéssaire de lire le code vous-même. Donc vous pouvez profiter des tests pour vérifier des tests de bases que j'ai vérifié.<br>
+Il y a deux types de tests, les tests qui ne nécéssite pas l'action de la personne derrière le clavier et ceux qui la nécéssite.<br>
+Donc selon le make que vous effectuez, préparez vous à devoir taper sur votre clavier pour tester les fonctions.
 
-## Remerciements
-Petit merci à Mehdi qui m'a fait remarquer des bétises dans mon code.
-
+##Remerciements
+Merci à Mehdi qui m'a fait remarquer des bétises dans mon code.<br>
+Merci à Guillaume pour la revue de code.<br>
+Et un grand merci à ma maman parce que c'est une crème.<br>

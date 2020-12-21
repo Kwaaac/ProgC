@@ -10,16 +10,23 @@
    integer labelling the end of the array.
  *
  * @param size Size of the allocated array
- * @return An empty array
+ * @return An empty array or NULL in case of an error
+ * @error If the size of the array is negative or the malloc fail, an error is raised and return value is NULL
  */
 int *allocate_integer_array(int size) {
     int *new_tab;
+
+    if (size <= 0) {
+        fprintf(stderr, "The size of an array should not be negative nor empty\n");
+        return NULL;
+    }
 
     new_tab = (int *) malloc((size + 1) * sizeof(int));
     if (new_tab == NULL) {
         fprintf(stderr, "Memory allocation error\n");
         return NULL;
     }
+
     return new_tab;
 }
 
@@ -42,6 +49,7 @@ int array_size(int *array) {
     while (array[res] != -1) {
         res++;
     }
+
     return res;
 }
 
@@ -54,6 +62,11 @@ void print_array(int *array) {
     int i;
     int size = array_size(array);
 
+    if(size == 0){
+        printf("This array is empty");
+        return;
+    }
+
     for (i = 0; i < size; i++) {
         if (i == (size - 1)) {
             printf("%d.", array[i]);
@@ -64,6 +77,24 @@ void print_array(int *array) {
     }
 
     printf("\n");
+}
+
+/**
+ * Push the second array into the first
+ *
+ * @param first First array
+ * @param second Second array
+ * @param first_index Starting index to fill the first array
+ * @param second_index Starting index to push from the second array
+ * @param size_second Size of the second array
+ */
+void push_array(int *first, int *second, int first_index, int second_index, int size_second) {
+    int i;
+    for (i = second_index; i < size_second; i++, first_index++) {
+        first[first_index] = second[i];
+    }
+
+    first[first_index] = -1;
 }
 
 /**
@@ -97,10 +128,7 @@ int *copy_array(int *array) {
     int size = array_size(array);
     int *copy = allocate_integer_array(size);
 
-    int i;
-    for (i = 0; i < size; i++) {
-        copy[i] = array[i];
-    }
+    push_array(copy, array, 0, 0, size);
 
     return copy;
 }
@@ -115,24 +143,46 @@ int *copy_array(int *array) {
  * the program will ask the user to put an other input
  */
 int *fill_array(void) {
-
     int *array;
     int size;
     int input;
 
     int i = 0;
 
-    do {
-        printf("Veuillez donner la taille de votre tableaux: ");
-    } while (read_int(&size));
+    /* Ask for the user the size of the array.
+         * If the user gives a non int input or the allocation causes an error,
+         * the user must give a new number*/
+    while (1) {
+        printf("Write the size of the array: ");
 
-    array = allocate_integer_array(size);
+        /* Input error handling */
+        if (read_int(&size)) {
+            printf("Input error, please reiterate\n");
+            continue;
+        }
+
+        array = allocate_integer_array(size);
+
+        /* allocation error handling */
+        if (array == NULL) {
+            printf("The previous error happened, please reiterate.\n");
+            continue;
+        }
+
+        break;
+    }
+
 
     while (i < size) {
-        printf("Donnez un nombre à ajouter: ");
+        printf("Give an element to push into the array: ");
 
         if (read_int(&input)) {
-            printf("Erreur de saisie, veuillez réitérer.\n");
+            printf("Input error, please reiterate\n");
+            continue;
+        }
+
+        if(input < 0){
+            printf("The elements must be positive, please reiterate\n");
             continue;
         }
 
@@ -153,10 +203,11 @@ int *fill_array(void) {
  * @param size Size of the array
  * @param max_entry Max element that can be generated
  * @return A new allocated array with the size given and pseudo-random elements
- *
+ * @error Return NULL if the size is lower or equal to 0
  */
 int *random_array(int size, int max_entry) {
     int i;
+
     int *array = allocate_integer_array(size + 1);
 
     for (i = 0; i < size; i++) {
@@ -166,24 +217,6 @@ int *random_array(int size, int max_entry) {
     array[size] = -1;
 
     return array;
-}
-
-/**
- * Push the second array into the first
- *
- * @param first First array
- * @param second Second array
- * @param first_index Starting index to fill the first array
- * @param second_index Starting index to push from the second array
- * @param size_second Size of the second array
- */
-void push_array(int *first, int *second, int first_index, int second_index, int size_second) {
-    int i;
-    for (i = second_index; i < size_second; i++, first_index++) {
-        first[first_index] = second[i];
-    }
-
-    first[first_index] = -1;
 }
 
 /**
@@ -227,14 +260,8 @@ int *merge_sorted_arrays(int *first, int *second) {
 
     int firstIndex = 0, secondIndex = 0, i = 0;
 
-    /* Debug (defined var in array.h)*/
-    if(DEBUG){
-        printf("\nMerging: \n");
-        print_array(first);
-        print_array(second);
-    }
-
-
+    /* Add elements in the array by sorting them by their size
+     * Quit the loop when one the two arrays are empty          */
     while (first[firstIndex] != -1 && second[secondIndex] != -1) {
 
         if (first[firstIndex] < second[secondIndex]) {
@@ -248,6 +275,7 @@ int *merge_sorted_arrays(int *first, int *second) {
         i++;
     }
 
+    /* Depending on which array is empty, we push the non-empty array into the result array */
     if (first[firstIndex] == -1) {
         push_array(array_res, second, i, secondIndex, size_second);
 
@@ -256,13 +284,17 @@ int *merge_sorted_arrays(int *first, int *second) {
 
     }
 
-    /* Debug (defined var in array.h)*/
-    if(DEBUG) {
-        print_array(array_res);
-    }
     return array_res;
 }
 
+/**
+ * Split an array into two different arrays.
+ * Note that on an odd array, the first array will be larger
+ *
+ * @param array The array you want to split
+ * @param first The first array
+ * @param second The second array
+ */
 void split_arrays(int *array, int **first, int **second) {
     int size_array = array_size(array);
     int size_second = size_array / 2;
@@ -276,33 +308,22 @@ void split_arrays(int *array, int **first, int **second) {
 
     *first = first_copy;
     *second = second_copy;
-
 }
 
+/**
+ * Apply the recursive merge sort algorithm to sort the given array.
+ * Uses a debug mode
+ *
+ * @param array The array you need to sort
+ * @return The array sorted
+ */
 int *merge_sort(int *array) {
     int *first;
     int *second;
 
     if (array_size(array) <= 1)return array;
 
-    /* Debug (defined var in array.h)*/
-    if(DEBUG) {
-        printf("Array: ");
-        print_array(array);
-    }
-
     split_arrays(array, &first, &second);
 
-    /* Debug (defined var in array.h)*/
-    if(DEBUG) {
-        printf("First Array: ");
-        print_array(first);
-        printf("Second Array: ");
-        print_array(second);
-
-        printf("\n");
-    }
-
     return merge_sorted_arrays(merge_sort(first), merge_sort(second));
-
 }
