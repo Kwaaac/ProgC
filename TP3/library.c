@@ -1,5 +1,4 @@
 #include "library.h"
-
 #include <stdio.h>
 
 
@@ -17,7 +16,6 @@ int exo4(int elt, int *tab, int size) {
     }
 }
 
-
 /* Print an array on the standard output*/
 void print_array(int *array, int size) {
     int i;
@@ -28,7 +26,6 @@ void print_array(int *array, int size) {
 
     printf("\n");
 }
-
 
 int main(int agc, char *argv[]) {
     int tab[5] = {5, 4, 2, 3, 1};

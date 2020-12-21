@@ -4,9 +4,14 @@
 #include "../lib/read.h"
 #include "array.h"
 
-/* Allocate memory for an array which can contain `size`
+/**
+ * Allocate memory for an array which can contain `size`
    integers. The returned C array has memory for an extra last
-   integer labelling the end of the array. */
+   integer labelling the end of the array.
+ *
+ * @param size Size of the allocated array
+ * @return An empty array
+ */
 int *allocate_integer_array(int size) {
     int *new_tab;
 
@@ -18,12 +23,20 @@ int *allocate_integer_array(int size) {
     return new_tab;
 }
 
-/* Free an integer array */
+/**
+ * Free an integer array
+ * @param tab Array
+ */
 void free_integer_array(int *tab) {
     free(tab);
 }
 
-/* Return the size of an array */
+/**
+ * Return the size of an array
+ *
+ * @param array An array
+ * @return Size of the array
+ */
 int array_size(int *array) {
     int res = 0;
     while (array[res] != -1) {
@@ -32,15 +45,19 @@ int array_size(int *array) {
     return res;
 }
 
-/* Print an array on the standard output*/
+/**
+ * Print an array on the standard output
+ *
+ * @param array An array to be printed
+ */
 void print_array(int *array) {
     int i;
     int size = array_size(array);
 
     for (i = 0; i < size; i++) {
-        if(i == (size - 1)){
+        if (i == (size - 1)) {
             printf("%d.", array[i]);
-        } else{
+        } else {
             printf("%d-", array[i]);
         }
 
@@ -49,6 +66,13 @@ void print_array(int *array) {
     printf("\n");
 }
 
+/**
+ * Check if the arrays are equals
+ *
+ * @param first First array
+ * @param second Second array
+ * @return 1 if the arrays are equals, 0 otherwise
+ */
 int are_arrays_equal(int *first, int *second) {
     int i;
     int size_first = array_size(first);
@@ -63,6 +87,12 @@ int are_arrays_equal(int *first, int *second) {
     return 1;
 }
 
+/**
+ * Copy an array into a new allocated array
+ *
+ * @param array The array to be copied
+ * @return A new allocated array with the elements of the parameter's array
+ */
 int *copy_array(int *array) {
     int size = array_size(array);
     int *copy = allocate_integer_array(size);
@@ -75,6 +105,15 @@ int *copy_array(int *array) {
     return copy;
 }
 
+/**
+ * User base array creation.
+ * Ask the user the size of the array, then ask for elements
+ * to fill the array until the size is complete
+ *
+ * @return A new allocated array with the size and elements given
+ * @error If the user gives a wrong type input (not int) for the size or the elements,
+ * the program will ask the user to put an other input
+ */
 int *fill_array(void) {
 
     int *array;
@@ -82,7 +121,6 @@ int *fill_array(void) {
     int input;
 
     int i = 0;
-
 
     do {
         printf("Veuillez donner la taille de votre tableaux: ");
@@ -108,6 +146,15 @@ int *fill_array(void) {
     return array;
 }
 
+/**
+ * Use pseudo-random generated numbers to fill an array of a delimited size and a delimited range of element between 0 and the given max element.
+ *
+ * @Warning Be sure to use srand before the use of this function
+ * @param size Size of the array
+ * @param max_entry Max element that can be generated
+ * @return A new allocated array with the size given and pseudo-random elements
+ *
+ */
 int *random_array(int size, int max_entry) {
     int i;
     int *array = allocate_integer_array(size + 1);
@@ -119,26 +166,6 @@ int *random_array(int size, int max_entry) {
     array[size] = -1;
 
     return array;
-}
-
-int *concat_array(int *first, int *second) {
-    int size_first = array_size(first);
-    int size_second = array_size(second);
-
-    int size_res = size_first + size_second;
-    int *array_res = allocate_integer_array(size_res);
-
-    int i = 0, j;
-    for (; i < size_first; i++) {
-        array_res[i] = first[i];
-    }
-
-    for (j = 0; i < size_res; i++, j++) {
-        array_res[i] = second[j];
-    }
-    array_res[i] = -1;
-
-    return array_res;
 }
 
 /**
@@ -159,6 +186,38 @@ void push_array(int *first, int *second, int first_index, int second_index, int 
     first[first_index] = -1;
 }
 
+/**
+ * Concat two arrays, first array's elements will be the first elements of the new array
+ *
+ * @param first First array
+ * @param second Second array
+ * @return A new allocated array being the concatenation of the two parameters
+ */
+int *concat_array(int *first, int *second) {
+    int size_first = array_size(first);
+    int size_second = array_size(second);
+
+    int size_res = size_first + size_second;
+    int *array_res = allocate_integer_array(size_res);
+
+    /* I push the first array into the res array from 0 to size first*/
+    push_array(array_res, first, 0, 0, size_first);
+
+    /* I push the second array into the res array, however,
+     * I start at size_first since it's the actual size of the res array*/
+    push_array(array_res, second, size_first, 0, size_second);
+
+    return array_res;
+}
+
+/**
+ * Merge two sorted arrays
+ *
+ * @warning If your arrays are not sorted, it's your problem
+ * @param first First array
+ * @param second Second array
+ * @return A new allocated array containing every element of the first and second array, sorted.
+ */
 int *merge_sorted_arrays(int *first, int *second) {
     int size_first = array_size(first);
     int size_second = array_size(second);
@@ -168,12 +227,13 @@ int *merge_sorted_arrays(int *first, int *second) {
 
     int firstIndex = 0, secondIndex = 0, i = 0;
 
-    if(size_first == 3 && size_second == 3){
-        printf("\n check \n");
+    /* Debug (defined var in array.h)*/
+    if(DEBUG){
+        printf("\nMerging: \n");
+        print_array(first);
+        print_array(second);
     }
-    printf("\nMerging: \n");
-    print_array(first);
-    print_array(second);
+
 
     while (first[firstIndex] != -1 && second[secondIndex] != -1) {
 
@@ -196,15 +256,14 @@ int *merge_sorted_arrays(int *first, int *second) {
 
     }
 
-
-
-    print_array(array_res);
-
+    /* Debug (defined var in array.h)*/
+    if(DEBUG) {
+        print_array(array_res);
+    }
     return array_res;
 }
 
 void split_arrays(int *array, int **first, int **second) {
-    int i;
     int size_array = array_size(array);
     int size_second = size_array / 2;
     int size_first = size_array - size_second;
@@ -212,13 +271,8 @@ void split_arrays(int *array, int **first, int **second) {
     int *first_copy = allocate_integer_array(size_first);
     int *second_copy = allocate_integer_array(size_second);
 
-    for (i = 0; i < size_first; i++) {
-        first_copy[i] = array[i];
-
-    }
-    first_copy[i] = -1;
-
-    push_array(second_copy, array, 0, i, size_array);
+    push_array(first_copy, array, 0, 0, size_first);
+    push_array(second_copy, array, 0, size_first, size_array);
 
     *first = first_copy;
     *second = second_copy;
@@ -231,17 +285,23 @@ int *merge_sort(int *array) {
 
     if (array_size(array) <= 1)return array;
 
-    printf("Array: ");
-    print_array(array);
+    /* Debug (defined var in array.h)*/
+    if(DEBUG) {
+        printf("Array: ");
+        print_array(array);
+    }
 
     split_arrays(array, &first, &second);
 
-    printf("First Array: ");
-    print_array(first);
-    printf("Second Array: ");
-    print_array(second);
+    /* Debug (defined var in array.h)*/
+    if(DEBUG) {
+        printf("First Array: ");
+        print_array(first);
+        printf("Second Array: ");
+        print_array(second);
 
-    printf("\n");
+        printf("\n");
+    }
 
     return merge_sorted_arrays(merge_sort(first), merge_sort(second));
 

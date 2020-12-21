@@ -1,5 +1,6 @@
 #ifndef TP5_ARRAY_H
 #define TP5_ARRAY_H
+#define DEBUG 0
 
 /* Allocate memory for an array which can contain `size`
    integers. The returned C array has memory for an extra last
@@ -31,5 +32,5 @@ void split_arrays(int* array, int** first, int** second);
 
 int* merge_sort(int* array);
 
-#endif /* TP5_ARRAY_H */
+#endif TP5_ARRAY_H
 
