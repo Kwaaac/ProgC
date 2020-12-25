@@ -28,7 +28,7 @@ Pour la revue il vous sera nécéssaire de lire le code vous-même. Donc vous po
 Il y a deux types de tests, les tests qui ne nécéssite pas l'action de la personne derrière le clavier et ceux qui la nécéssite.<br>
 Donc selon le make que vous effectuez, préparez vous à devoir taper sur votre clavier pour tester les fonctions.
 
-##Remerciements
+## Remerciements
 Merci à Mehdi qui m'a fait remarquer des bétises dans mon code.<br>
 Merci à Guillaume pour la revue de code.<br>
 Et un grand merci à ma maman parce que c'est une crème.<br>
