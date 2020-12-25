@@ -19,5 +19,6 @@ int fread_board(const char* file, Board board){
       board[i][j] = entry;
     }
   }
+
   return 1;
 }

@@ -3,7 +3,10 @@
 
 typedef int Board[9][9];
 
-void initialize_empty_board(Board grid);
 void print_board(Board grid);
+
+void solve_grid(Board grid, int max);
+
+void number_of_solving_grid(Board grid, int max, int *nbr_find);
 
 #endif
