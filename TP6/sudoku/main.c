@@ -3,12 +3,19 @@
 #include "sudoku.h"
 #include "in_out.h"
 
-int main(int argc, char* argv[]){
-  Board B;
+int main(int argc, char *argv[]) {
+    Board B;
+    int res;
 
-  fread_board(argv[1], B);
+    res = 0;
 
-  print_board(B);
+    fread_board(argv[1], B);
 
-  return 0;
+    print_board(B);
+    solve_grid(B, 9);
+    number_of_solving_grid(B, 9, &res);
+    printf("For grid %s, there is %d solutions\n", argv[1], res);
+
+
+    return 0;
 }

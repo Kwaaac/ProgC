@@ -3,6 +3,9 @@ CFLAGS=-Wall -ansi
 LDFLAGS=
 OBJ=sudoku.o main.o in_out.o
 
+run: sudoku
+	./sudoku data/grid1.txt
+
 sudoku: $(OBJ)
 	$(CC) -o sudoku $(OBJ) $(CFLAGS)
 
@@ -15,20 +18,20 @@ sudoku.o: sudoku.c sudoku.h
 in_out.o: in_out.c in_out.h
 	$(CC) -c in_out.c $(CFLAGS)
 
-run_g1:
+1: sudoku
 	./sudoku data/grid1.txt
 
-run_g2:
-	./sudoku data/grid1.txt
+2: sudoku
+	./sudoku data/grid2.txt
 
-run_g3:
-	./sudoku data/grid1.txt
+3: sudoku
+	./sudoku data/grid3.txt
 
-run_g4:
-	./sudoku data/grid1.txt
+4: sudoku
+	./sudoku data/grid4.txt
 
-run_g5:
-	./sudoku data/grid1.txt
+5: sudoku
+	./sudoku data/grid5.txt
 
 clean: 
 	rm -f *.o
