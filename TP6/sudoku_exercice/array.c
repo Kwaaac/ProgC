@@ -93,10 +93,10 @@ void permutations(int buffer[], int current, int max) {
 int main() {
     int *t;
 
-    t = allocate_integer_array(9);
-    print_array_permutation(t, 0, 9);
+    t = allocate_integer_array(3);
+    print_array_permutation(t, 0, 3);
 
-    permutations(t, 1, 9);
+    permutations(t, 1, 3);
 
     free_integer_array(t);
 

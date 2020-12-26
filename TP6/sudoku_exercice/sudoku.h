@@ -9,4 +9,4 @@ void solve_grid(Board grid, int max);
 
 void number_of_solving_grid(Board grid, int max, int *nbr_find);
 
-#endif
+#endif /* __SUDOKU__ */

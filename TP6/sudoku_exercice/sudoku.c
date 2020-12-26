@@ -6,7 +6,7 @@
 /**
  * Check if the number is valid on the row
  *
- * @warning Except the grid, every argument should be between 1 and 9. Unless you want to play a weird sudoku, respect that
+ * @warning Except the grid, every argument should be between 1 and 9. Unless you want to play a weird sudoku_exercice, respect that
  * @param grid Sudoku grid
  * @param row Row index
  * @param number Number between 1-9
@@ -156,6 +156,12 @@ void number_of_solving_grid(Board grid, int max, int *nbr_find) {
     }
 }
 
+
+/**
+ * Print the given grid
+ *
+ * @param grid Sudoku grid
+ */
 void print_board(Board grid) {
     int i, j;
     printf("Sudoku grid:\n");
