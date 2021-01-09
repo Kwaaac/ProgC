@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <MLV/MLV_all.h>
 
 typedef enum couleur {
     ROUGE,
@@ -37,7 +38,13 @@ typedef struct list_token {
 
 void print_liste(Liste liste);
 
+int equals_tokens(Tokens *first, Tokens *second);
+
+Tokens *pop(Liste *liste);
+
 void pop_and_free(Liste *liste);
+
+Tokens *remove_token(Liste *liste);
 
 void remove_and_free(Liste *liste);
 
@@ -53,10 +60,12 @@ Tokens *allouer_token(Couleur couleur, Forme forme);
 
 void free_liste(Liste* liste);
 
-int push(Liste *liste, Couleur couleur, Forme forme);
+int push(Liste *liste, Tokens *token);
 
-int append(Liste *liste, Couleur couleur, Forme forme);
+int append(Liste *liste, Tokens *token);
 
 Liste *allouer_liste();
+
+Tokens *get_random_token();
 
 #endif /*THREETOPUSH_MODEL_H*/

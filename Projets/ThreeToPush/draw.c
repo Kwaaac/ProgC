@@ -84,14 +84,25 @@ void draw_token(Tokens *tokens, int x, int y) {
 }
 
 void draw_liste(Liste liste, int x, int y) {
-    int i;
     Tokens *token;
     if (liste.length == 0) { return; }
 
     x = x - (liste.length / 2) * (FORM_SCALE + SPACING);
-    token = liste.last_element;
+    token = liste.last_element->suivant;
 
-    for (i = 0; i < liste.length; i++, x = x + FORM_SCALE + SPACING, token = token->suivant) {
+    while (!equals_tokens(token, liste.last_element)) {
         draw_token(token, x, y);
+
+        token = token->suivant;
+        x = x + FORM_SCALE + SPACING;
     }
+
+    draw_token(token, x, y);
+}
+
+void redraw_window(Liste liste, Liste liste_player){
+    MLV_draw_filled_rectangle(0, 0, WINDOW_WIDTH - 1, WINDOW_HEIGHT - 1, MLV_COLOR_BLACK);
+    draw_liste(liste, WINDOW_WIDTH / 3, WINDOW_HEIGHT / 4);
+    draw_liste(liste_player, WINDOW_WIDTH / 2, (WINDOW_HEIGHT / 4) * 3);
+    MLV_actualise_window();
 }

@@ -72,8 +72,8 @@ Liste *allouer_liste() {
     return l;
 }
 
-void free_liste_rec(Liste* liste){
-    if(liste->length == 0){
+void free_liste_rec(Liste *liste) {
+    if (liste->length == 0) {
         return;
     }
 
@@ -81,7 +81,7 @@ void free_liste_rec(Liste* liste){
     free_liste_rec(liste);
 }
 
-void free_liste(Liste* liste){
+void free_liste(Liste *liste) {
     free_liste_rec(liste);
     free(liste);
 }
@@ -93,8 +93,7 @@ void free_liste(Liste* liste){
  * @param couleur
  * @param forme
  */
-int push(Liste *liste, Couleur couleur, Forme forme) {
-    Tokens *token = allouer_token(couleur, forme);
+int push(Liste *liste, Tokens *token) {
     if (token == NULL) { return 0; }
     liste->length += 1;
 
@@ -119,8 +118,7 @@ int push(Liste *liste, Couleur couleur, Forme forme) {
  * @param couleur
  * @param forme
  */
-int append(Liste *liste, Couleur couleur, Forme forme) {
-    Tokens *token = allouer_token(couleur, forme);
+int append(Liste *liste, Tokens *token) {
     if (token == NULL) { return 0; }
     liste->length += 1;
 
@@ -146,9 +144,11 @@ Tokens *pop(Liste *liste) {
     if (liste->length == 1) {
         token = liste->last_element;
         liste->last_element = NULL;
+        liste->length -= 1;
         return token;
     }
 
+    liste->length -= 1;
     token = liste->last_element->suivant;
     liste->last_element->suivant = liste->last_element->suivant->suivant;
 
@@ -162,8 +162,6 @@ void pop_and_free(Liste *liste) {
     }
 
     free_token(pop(liste));
-
-    liste->length -= 1;
 }
 
 Tokens *remove_token(Liste *liste) {
@@ -172,8 +170,10 @@ Tokens *remove_token(Liste *liste) {
     if (liste->length == 1) {
         token = liste->last_element;
         liste->last_element = NULL;
+        liste->length -= 1;
         return token;
     }
+    liste->length -= 1;
 
     token = liste->last_element->suivant;
 
@@ -196,8 +196,6 @@ void remove_and_free(Liste *liste) {
     }
 
     free_token(remove_token(liste));
-
-    liste->length -= 1;
 }
 
 int check_pop(Liste *liste) {
@@ -206,16 +204,18 @@ int check_pop(Liste *liste) {
         return 0;
     }
 
-    if ((liste->last_element->couleur == liste->last_element->suivant->couleur) && liste->last_element->couleur ==
-                                                                                   liste->last_element->suivant->suivant->couleur) {
+    if ((liste->last_element->suivant->couleur == liste->last_element->suivant->suivant->couleur) && liste->last_element->suivant->couleur ==
+                                                                                   liste->last_element->suivant->suivant->suivant->couleur) {
+        printf("On pop 3 couleurs\n");
         for (i = 0; i < 3; i++) {
             pop_and_free(liste);
         }
         return 1;
     }
 
-    if ((liste->last_element->forme == liste->last_element->suivant->forme) &&
-        liste->last_element->forme == liste->last_element->suivant->suivant->forme) {
+    if ((liste->last_element->suivant->forme == liste->last_element->suivant->suivant->forme) && liste->last_element->suivant->forme ==
+                                                                               liste->last_element->suivant->suivant->suivant->forme) {
+        printf("On pop 3 forme\n");
         for (i = 0; i < 3; i++) {
             pop_and_free(liste);
         }
@@ -236,8 +236,10 @@ int check_remove(Liste *liste) {
     for (i = liste->length, token = liste->last_element->suivant; i > 3; i--) {
         token = token->suivant;
     }
+    printf("%s, %s\n", get_form_name_from_enum(token->forme), get_color_name_from_enum(token->couleur));
 
     if ((token->couleur == token->suivant->couleur) && token->couleur == token->suivant->suivant->couleur) {
+        printf("On remove 3 couleurs\n");
         for (i = 0; i < 3; i++) {
             remove_and_free(liste);
         }
@@ -245,6 +247,7 @@ int check_remove(Liste *liste) {
     }
 
     if ((token->forme == token->suivant->forme) && token->forme == token->suivant->suivant->forme) {
+        printf("On remove 3 formes\n");
         for (i = 0; i < 3; i++) {
             remove_and_free(liste);
         }
@@ -288,4 +291,41 @@ char *get_color_name_from_enum(Couleur couleur) {
             return "Undefined Color";
 
     }
+}
+
+Couleur get_color_from_int(int nbr) {
+    switch (nbr) {
+        case 1:
+            return ROUGE;
+        case 2:
+            return VERT;
+        case 3:
+            return BLEU;
+        case 4:
+            return JAUNE;
+        default:
+            return ROUGE;
+
+    }
+}
+
+Forme get_form_from_int(int nbr) {
+    switch (nbr) {
+        case 1:
+            return CERCLE;
+        case 2:
+            return CARRE;
+        case 3:
+            return TRIANGLE;
+        case 4:
+            return DIAMANT;
+        default:
+            return CERCLE;
+
+    }
+}
+
+Tokens *get_random_token() {
+    return allouer_token(get_color_from_int(MLV_get_random_integer(1, 4)),
+                         get_form_from_int(MLV_get_random_integer(1, 4)));
 }

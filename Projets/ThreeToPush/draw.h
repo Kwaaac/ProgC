@@ -11,5 +11,7 @@
 
 void draw_liste(Liste liste, int x, int y);
 
+void redraw_window(Liste liste, Liste liste_player);
+
 
 #endif /*THREETOPUSH_DRAW_H*/
