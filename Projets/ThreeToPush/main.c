@@ -1,42 +1,25 @@
 #include <stdio.h>
+#include <MLV/MLV_all.h>
 #include "model.h"
+#include "draw.h"
 
-int main() {
+int main(int argc, char* argv[]) {
+    Liste *liste = allouer_liste();
 
-    Liste *l = allouer_liste();
+    push(liste, TRIANGLE, ROUGE);
+    push(liste, CERCLE, JAUNE);
+    push(liste, DIAMANT, VERT);
+    push(liste, CARRE, BLEU);
 
-    print_liste(*l);
+    print_liste(*liste);
 
-    append(l, ROUGE, TRIANGLE);
+    MLV_create_window("ThreeToGo", "ThreeToGo", WINDOW_WIDTH, WINDOW_HEIGHT);
 
-    print_liste(*l);
+    draw_liste(*liste, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 
-    append(l, VERT, DIAMANT);
+    MLV_wait_seconds(60);
 
-    print_liste(*l);
-
-    append(l, JAUNE, CERCLE);
-
-    print_liste(*l);
-
-    append(l, BLEU, TRIANGLE);
-
-    print_liste(*l);
-
-    append(l, VERT, TRIANGLE);
-
-    print_liste(*l);
-
-    append(l, BLEU, TRIANGLE);
-
-    print_liste(*l);
-
-    check_pop(l);
-    check_remove(l);
-
-    print_liste(*l);
-
-    free_liste(l);
-
+    MLV_free_window();
+    free_liste(liste);
     return 0;
 }

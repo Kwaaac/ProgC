@@ -1,6 +1,4 @@
-#include <search.h>
 #include "model.h"
-
 
 int equals_tokens(Tokens *first, Tokens *second) {
     return first == second &&
@@ -221,6 +219,7 @@ int check_pop(Liste *liste) {
         for (i = 0; i < 3; i++) {
             pop_and_free(liste);
         }
+
         return 2;
     }
 
