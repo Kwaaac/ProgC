@@ -133,6 +133,11 @@ void solve_board(Board *board, int max) {
 
 }
 
+/**
+ * @Deprecated Remove random number in a board
+ *
+ * @param board sudoku board
+ */
 void remove_numbers_in_board(Board *board) {
     int i, j;
     int count = 20;
@@ -199,6 +204,13 @@ void print_board(Board board) {
     printf("\n-------------------------------------\n");
 }
 
+/**
+ * Check if the board is complete or not
+ *
+ * @param board sudoku board
+ * @param max max size of the board
+ * @return 1 if complete, 0 otherwise
+ */
 int is_board_valid(Board board, int max) {
     int i, j;
 
