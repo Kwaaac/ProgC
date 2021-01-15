@@ -55,3 +55,8 @@ dkms.conf
 */CMakeLists.txt
 */cmake-build-debug/*
 *.idea
+Projets/ThreeToPush/cmake-build-debug/
+
+Projets/ThreeToPush/CMakeLists.txt
+
+Projets/ThreeToPush/threetogo

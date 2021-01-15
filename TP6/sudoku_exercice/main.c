@@ -9,7 +9,9 @@ int main(int argc, char *argv[]) {
 
     res = 0;
 
-    fread_board(argv[1], B);
+    if(!fread_board(argv[1], B)){
+        return 1;
+    }
 
     print_board(B);
     solve_grid(B, 9);
