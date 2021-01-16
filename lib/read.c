@@ -3,7 +3,6 @@
 */
 
 #include <stdio.h>
-#include <memory.h>
 #include <stdlib.h>
 #include <errno.h>
 #include <limits.h>
@@ -22,8 +21,6 @@ void clear_buffer() {
 }
 
 /**
- *
- *
  * @param input array to store the input
  * @param size size of the array
  * @return Return 0 if the function doesn't have any errors, 1 otherwise
@@ -52,7 +49,7 @@ int read_input(char *input, int size) {
  *  Read the standard input and convert it to an integer
  *
  * @param res pointer pointing to the result
- * @return 0 if no errors, 1 otherwise
+ * @return 1 if no errors, 0 otherwise
  */
 int read_int(int *res) {
     long verif;
@@ -71,12 +68,12 @@ int read_int(int *res) {
          * strlen(endptr) != 0 --> We do not want any char inside the input
          */
         if ((errno == ERANGE && (verif == LONG_MAX || verif == LONG_MIN)) || (errno != 0 && verif == 0) || strlen(endptr) != 0) {
-            return 1;
+            return 0;
         }
 
         *res = (int) verif;
 
-        return 0;
+        return 1;
     }
     return 1;
 }
