@@ -5,67 +5,159 @@
 #include <stdlib.h>
 #include <MLV/MLV_all.h>
 
-typedef enum couleur {
-    ROUGE,
-    VERT,
-    BLEU,
-    JAUNE
-} Couleur;
-typedef enum forme {
-    CERCLE,
-    CARRE,
+/**
+ * Enumeration of the defined colors
+ */
+typedef enum color {
+    RED,
+    GREEN,
+    BLUE,
+    YELLOW
+} Color;
+
+/**
+ * Enumeration of the defined forms
+ */
+typedef enum form {
+    CIRCLE,
+    SQUARE,
     TRIANGLE,
-    DIAMANT
-} Forme;
+    DIAMOND
+} Form;
 
+/**
+ * token structure
+ *
+ * color: color of the token
+ * form: form of the token
+ *
+ * *next: next token
+ * *next_color: next token matching the same color
+ * *previous_color: previous token matching the same color
+ * *next_form: next token matching the same color
+ * *previous_form: previous token matching the same color
+ */
 typedef struct token {
-    Couleur couleur;
-    Forme forme;
+    Color color;
+    Form form;
 
-    struct token *suivant;
+    struct token *next;
 
-    struct token *suivant_couleur;
-    struct token *precedent_couleur;
-    struct token *suivant_forme;
-    struct token *precedent_forme;
+    struct token *next_color;
+    struct token *previous_color;
+    struct token *next_form;
+    struct token *previous_form;
 } Tokens;
 
+/**
+ * structure of a list of tokens
+ * @var length length of the list
+ * @var *last_element last element of the list
+ */
 typedef struct list_token {
     int length;
     Tokens *last_element;
-} Liste;
+} List;
 
 
-void print_liste(Liste liste);
+/**
+ * print every token from the given list
+ *
+ * @param list list of tokens
+ */
+void print_liste(List list);
 
+/**
+ * Compare two tokens and return if they are equals
+ *
+ * @param first First token to be compared
+ * @param second Second token to be compared
+ * @return 1 if the tokens are equals, 0 otherwise
+ */
 int equals_tokens(Tokens *first, Tokens *second);
 
-Tokens *pop(Liste *liste);
 
-void pop_and_free(Liste *liste);
 
-Tokens *remove_token(Liste *liste);
 
-void remove_and_free(Liste *liste);
 
-int check_pop(Liste* liste);
+/**
+ * Remove the last token from the given list
+ *
+ * @param list List of tokens
+ * @return Token the removed token
+ */
+Tokens *remove_token(List *list);
 
-int check_remove(Liste* liste);
 
-char *get_color_name_from_enum(Couleur couleur);
+/**
+ * Verify if the list can pop 3 tokens from the beginning of the list
+ *
+ * @param list List of token
+ * @return 1 if 3 tokens can be popped, 0 otherwise
+ */
+int check_pop(List* list);
 
-char *get_form_name_from_enum(Forme forme);
+/**
+ * Verify if the list can remove 3 tokens from the ending of the list
+ *
+ * @param list List of token
+ * @return 1 if 3 tokens can be removed, 0 otherwise
+ */
+int check_remove(List* list);
 
-Tokens *allouer_token(Couleur couleur, Forme forme);
+/**
+ * Get a char of the color's name from the Color enum
+ *
+ * @remark Deprecated, was used for the level 1 of the project to print the lists
+ * @param color Enum color
+ * @return Char of the color's name
+ */
+char *get_color_name_from_enum(Color color);
 
-void free_liste(Liste* liste);
+/**
+ * Get a char of the form's name from the Form enum
+ *
+ * @remark Deprecated, was used for the level 1 of the project to print the lists
+ * @param color Enum form
+ * @return Char of the form's name
+ */
+char *get_form_name_from_enum(Form form);
 
-int push(Liste *liste, Tokens *token);
+/**
+ * Free the List and every token from the list
+ *
+ * @param list List of tokens
+ */
+void free_liste(List* list);
 
-int append(Liste *liste, Tokens *token);
+/**
+ * Push a new token before the first element of the token given
+ *
+ * @param list List of tokens
+ * @param token New token to be pushed
+ */
+int push(List *list, Tokens *token);
 
-Liste *allouer_liste();
+/**
+ * Append a new token as the last element of the given list
+ *
+ * @param list List of tokens
+ * @param token New token to be appened
+ */
+int append(List *list, Tokens *token);
 
-Tokens *get_random_token();
+/**
+ * Create and allocate a new list
+ *
+ * @return Pointer to the list
+ */
+List *allocate_list(void);
+
+/**
+ * Randomly create a new token
+ *
+ * @return Pointer to the new token
+ */
+Tokens *get_random_token(void);
 
 #endif /*THREETOPUSH_MODEL_H*/

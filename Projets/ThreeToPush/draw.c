@@ -1,15 +1,15 @@
 #include "draw.h"
 
 
-MLV_Color get_mlv_color_from_enum(Couleur couleur) {
+MLV_Color get_mlv_color_from_enum(Color couleur) {
     switch (couleur) {
-        case ROUGE:
+        case RED:
             return MLV_COLOR_RED;
-        case VERT:
+        case GREEN:
             return MLV_COLOR_GREEN;
-        case BLEU:
+        case BLUE:
             return MLV_COLOR_BLUE;
-        case JAUNE:
+        case YELLOW:
             return MLV_COLOR_YELLOW;
         default:
             return MLV_COLOR_WHITE;
@@ -65,42 +65,42 @@ void draw_triangle(int x, int y, MLV_Color color) {
 }
 
 void draw_token(Tokens *tokens, int x, int y) {
-    switch (tokens->forme) {
-        case CERCLE:
-            draw_cercle(x, y, get_mlv_color_from_enum(tokens->couleur));
+    switch (tokens->form) {
+        case CIRCLE:
+            draw_cercle(x, y, get_mlv_color_from_enum(tokens->color));
             break;
-        case CARRE:
-            draw_carre(x, y, get_mlv_color_from_enum(tokens->couleur));
+        case SQUARE:
+            draw_carre(x, y, get_mlv_color_from_enum(tokens->color));
             break;
         case TRIANGLE:
-            draw_triangle(x, y, get_mlv_color_from_enum(tokens->couleur));
+            draw_triangle(x, y, get_mlv_color_from_enum(tokens->color));
             break;
-        case DIAMANT:
-            draw_diamant(x, y, get_mlv_color_from_enum(tokens->couleur));
+        case DIAMOND:
+            draw_diamant(x, y, get_mlv_color_from_enum(tokens->color));
             break;
     }
 
     MLV_actualise_window();
 }
 
-void draw_liste(Liste liste, int x, int y) {
+void draw_liste(List liste, int x, int y) {
     Tokens *token;
     if (liste.length == 0) { return; }
 
     x = x - (liste.length / 2) * (FORM_SCALE + SPACING);
-    token = liste.last_element->suivant;
+    token = liste.last_element->next;
 
     while (!equals_tokens(token, liste.last_element)) {
         draw_token(token, x, y);
 
-        token = token->suivant;
+        token = token->next;
         x = x + FORM_SCALE + SPACING;
     }
 
     draw_token(token, x, y);
 }
 
-void redraw_window(Liste liste, Liste liste_player){
+void redraw_window(List liste, List liste_player){
     MLV_draw_filled_rectangle(0, 0, WINDOW_WIDTH - 1, WINDOW_HEIGHT - 1, MLV_COLOR_BLACK);
     draw_liste(liste, WINDOW_WIDTH / 3, WINDOW_HEIGHT / 4);
     draw_liste(liste_player, WINDOW_WIDTH / 2, (WINDOW_HEIGHT / 4) * 3);

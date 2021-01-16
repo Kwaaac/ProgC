@@ -9,9 +9,9 @@
 #define FORM_SCALE 60
 #define SPACING 10
 
-void draw_liste(Liste liste, int x, int y);
+void draw_liste(List liste, int x, int y);
 
-void redraw_window(Liste liste, Liste liste_player);
+void redraw_window(List liste, List liste_player);
 
 
 #endif /*THREETOPUSH_DRAW_H*/

@@ -4,15 +4,22 @@
 #include "draw.h"
 
 int main(int argc, char *argv[]) {
+    /* Main game loop */
+    int i;
     MLV_Event event;
-    Liste *liste = allouer_liste();
-    Liste *liste2 = allouer_liste();
+    MLV_Keyboard_button key_button;
+    MLV_Mouse_button mouse_button;
+    MLV_Button_state mouse_state;
+    int x_pixel, y_pixel;
+    int game_over;
 
-    push(liste, get_random_token());
-    push(liste, get_random_token());
-    push(liste, get_random_token());
-    push(liste, get_random_token());
-    push(liste, get_random_token());
+    List *liste = allocate_list();
+    List *liste2 = allocate_list();
+
+    for(i = 0; i < 5; i++){
+        push(liste, get_random_token());
+    }
+
 
     print_liste(*liste);
 
@@ -22,13 +29,8 @@ int main(int argc, char *argv[]) {
 
     MLV_wait_seconds(1);
 
-    /* Main game loop */
+    game_over = 0;
     event = MLV_NONE;
-    MLV_Keyboard_button key_button;
-    MLV_Mouse_button mouse_button;
-    MLV_Button_state mouse_state;
-    int x_pixel, y_pixel;
-    int game_over = 0;
     while (!(event == MLV_KEY && key_button == MLV_KEYBOARD_ESCAPE)) {
 
         event = MLV_wait_event(

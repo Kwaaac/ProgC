@@ -1,65 +1,74 @@
 #include "model.h"
 
+
 int equals_tokens(Tokens *first, Tokens *second) {
     return first == second &&
-           first->couleur == second->couleur &&
-           first->forme == second->forme &&
-           first->suivant_couleur == second->suivant_couleur &&
-           first->suivant_forme == second->suivant_forme &&
-           first->precedent_couleur == second->precedent_couleur &&
-           first->precedent_forme == second->precedent_forme;
+           first->color == second->color &&
+           first->form == second->form &&
+           first->next_color == second->next_color &&
+           first->next_form == second->next_form &&
+           first->previous_color == second->previous_color &&
+           first->previous_form == second->previous_form;
 }
 
-void print_liste(Liste liste) {
+void print_liste(List list) {
     Tokens *token;
 
-    if (liste.length <= 0) {
+    if (list.length <= 0) {
         return;
     }
 
-    token = liste.last_element->suivant;
+    token = list.last_element->next;
 
 
-    while (!equals_tokens(token, liste.last_element)) {
-        printf("%s, %s --> ", get_form_name_from_enum(token->forme), get_color_name_from_enum(token->couleur));
+    while (!equals_tokens(token, list.last_element)) {
 
-        token = token->suivant;
+        token = token->next;
     }
-    printf("%s, %s.\n", get_form_name_from_enum(liste.last_element->forme),
-           get_color_name_from_enum(liste.last_element->couleur));
 }
 
-Tokens *allouer_token(Couleur couleur, Forme forme) {
+/**
+ * Create and allocate a token with a color and a form given
+ *
+ * @param color Color of the token
+ * @param form Form of the token
+ * @return Pointer to the new token
+ */
+Tokens *allocate_token(Color color, Form form) {
     Tokens *tokens = (Tokens *) malloc(sizeof(Tokens));
     if (tokens == NULL) {
         fprintf(stderr, "Erreur de mémoire");
         return tokens;
     }
 
-    tokens->couleur = couleur;
-    tokens->forme = forme;
-    tokens->suivant = NULL;
-    tokens->suivant_forme = NULL;
-    tokens->suivant_couleur = NULL;
-    tokens->precedent_forme = NULL;
-    tokens->precedent_couleur = NULL;
+    tokens->color = color;
+    tokens->form = form;
+    tokens->next = NULL;
+    tokens->next_form = NULL;
+    tokens->next_color = NULL;
+    tokens->previous_form = NULL;
+    tokens->previous_color = NULL;
 
     return tokens;
 }
 
 void free_token(Tokens *token) {
-    token->suivant = NULL;
-    token->suivant_couleur = NULL;
-    token->suivant_forme = NULL;
-    token->precedent_couleur = NULL;
-    token->precedent_forme = NULL;
+    token->next = NULL;
+    token->next_color = NULL;
+    token->next_form = NULL;
+    token->previous_color = NULL;
+    token->previous_form = NULL;
 
     free(token);
 }
 
-
-Liste *allouer_liste() {
-    Liste *l = (Liste *) malloc(sizeof(Liste));
+/**
+ * Create and allocate a new list
+ *
+ * @return Pointer to the list
+ */
+List *allocate_list() {
+    List *l = (List *) malloc(sizeof(List));
 
     if (l == NULL) {
         fprintf(stderr, "Erreur de mémoire");
@@ -72,41 +81,87 @@ Liste *allouer_liste() {
     return l;
 }
 
-void free_liste_rec(Liste *liste) {
-    if (liste->length == 0) {
+/**
+ * Remove the first token of the list and returns it
+ *
+ * @param list List of token
+ * @return Token the token removed
+ */
+Tokens *pop(List *list) {
+    Tokens *token;
+
+    if (list->length == 1) {
+        token = list->last_element;
+        list->last_element = NULL;
+        list->length -= 1;
+        return token;
+    }
+
+    list->length -= 1;
+    token = list->last_element->next;
+    list->last_element->next = list->last_element->next->next;
+
+    return token;
+
+}
+
+/**
+ * Uses the pop function to free the removed token
+ *
+ * @param list List of tokens
+ */
+void pop_and_free(List *list) {
+    if (list->length == 0) {
         return;
     }
 
-    pop_and_free(liste);
-    free_liste_rec(liste);
+    free_token(pop(list));
 }
 
-void free_liste(Liste *liste) {
-    free_liste_rec(liste);
-    free(liste);
+/**
+ * Recursively free every token from the given list
+ *
+ * @param list List of token
+ */
+void free_liste_rec(List *list) {
+    if (list->length == 0) {
+        return;
+    }
+
+    pop_and_free(list);
+    free_liste_rec(list);
+}
+
+/**
+ * Free the List and every token from the list
+ *
+ * @param list List of tokens
+ */
+void free_liste(List *list) {
+    free_liste_rec(list);
+    free(list);
 }
 
 /**
  * Push a new token before the first element of the token given
  *
- * @param token
- * @param couleur
- * @param forme
+ * @param list List of tokens
+ * @param token New token to be pushed
  */
-int push(Liste *liste, Tokens *token) {
+int push(List *list, Tokens *token) {
     if (token == NULL) { return 0; }
-    liste->length += 1;
+    list->length += 1;
 
-    if (liste->last_element == NULL) {
-        token->suivant = token;
-        liste->last_element = token;
+    if (list->last_element == NULL) {
+        token->next = token;
+        list->last_element = token;
         return 1;
     }
 
     /* Add next part where you push on being the next colo or form */
 
-    token->suivant = liste->last_element->suivant;
-    liste->last_element->suivant = token;
+    token->next = list->last_element->next;
+    list->last_element->next = token;
 
     return 1;
 }
@@ -114,110 +169,100 @@ int push(Liste *liste, Tokens *token) {
 /**
  * Append a new token as the last element of the given list
  *
- * @param token
- * @param couleur
- * @param forme
+ * @param list List of tokens
+ * @param token New token to be appened
  */
-int append(Liste *liste, Tokens *token) {
+int append(List *list, Tokens *token) {
     if (token == NULL) { return 0; }
-    liste->length += 1;
+    list->length += 1;
 
-    if (liste->last_element == NULL) {
-        liste->last_element = token;
-        token->suivant = token;
+    if (list->last_element == NULL) {
+        list->last_element = token;
+        token->next = token;
         return 1;
     }
 
     /* Add next part where you push on being the next colo or form */
 
-    token->suivant = liste->last_element->suivant;
-    liste->last_element->suivant = token;
+    token->next = list->last_element->next;
+    list->last_element->next = token;
 
-    liste->last_element = token;
+    list->last_element = token;
 
     return 1;
 }
 
-Tokens *pop(Liste *liste) {
-    Tokens *token;
-
-    if (liste->length == 1) {
-        token = liste->last_element;
-        liste->last_element = NULL;
-        liste->length -= 1;
-        return token;
-    }
-
-    liste->length -= 1;
-    token = liste->last_element->suivant;
-    liste->last_element->suivant = liste->last_element->suivant->suivant;
-
-    return token;
-
-}
-
-void pop_and_free(Liste *liste) {
-    if (liste->length == 0) {
-        return;
-    }
-
-    free_token(pop(liste));
-}
-
-Tokens *remove_token(Liste *liste) {
+/**
+ * Remove the last token from the given list
+ *
+ * @param list List of tokens
+ * @return Token the removed token
+ */
+Tokens *remove_token(List *list) {
     Tokens *token, *res;
 
-    if (liste->length == 1) {
-        token = liste->last_element;
-        liste->last_element = NULL;
-        liste->length -= 1;
+    if (list->length == 1) {
+        token = list->last_element;
+        list->last_element = NULL;
+        list->length -= 1;
         return token;
     }
-    liste->length -= 1;
+    list->length -= 1;
 
-    token = liste->last_element->suivant;
+    token = list->last_element->next;
 
-    while (!equals_tokens(token->suivant, liste->last_element)) {
-        token = token->suivant;
+    while (!equals_tokens(token->next, list->last_element)) {
+        token = token->next;
     }
 
-    token->suivant = liste->last_element->suivant;
+    token->next = list->last_element->next;
 
-    res = liste->last_element;
+    res = list->last_element;
 
-    liste->last_element = token;
+    list->last_element = token;
 
     return res;
 }
 
-void remove_and_free(Liste *liste) {
-    if (liste->length == 0) {
+/**
+ * Uses the remove_token function to free the removed token
+ *
+ * @param list List of tokens
+ */
+void remove_and_free(List *list) {
+    if (list->length == 0) {
         return;
     }
 
-    free_token(remove_token(liste));
+    free_token(remove_token(list));
 }
 
-int check_pop(Liste *liste) {
+/**
+ * Verify if the list can pop 3 tokens from the beginning of the list
+ *
+ * @param list List of token
+ * @return 1 if 3 tokens can be popped, 0 otherwise
+ */
+int check_pop(List *list) {
     int i;
-    if (liste->length < 3) {
+    if (list->length < 3) {
         return 0;
     }
 
-    if ((liste->last_element->suivant->couleur == liste->last_element->suivant->suivant->couleur) && liste->last_element->suivant->couleur ==
-                                                                                   liste->last_element->suivant->suivant->suivant->couleur) {
-        printf("On pop 3 couleurs\n");
+    if ((list->last_element->next->color == list->last_element->next->next->color) && list->last_element->next->color ==
+                                                                                      list->last_element->next->next->next->color) {
+
         for (i = 0; i < 3; i++) {
-            pop_and_free(liste);
+            pop_and_free(list);
         }
         return 1;
     }
 
-    if ((liste->last_element->suivant->forme == liste->last_element->suivant->suivant->forme) && liste->last_element->suivant->forme ==
-                                                                               liste->last_element->suivant->suivant->suivant->forme) {
-        printf("On pop 3 forme\n");
+    if ((list->last_element->next->form == list->last_element->next->next->form) && list->last_element->next->form ==
+                                                                                    list->last_element->next->next->next->form) {
+
         for (i = 0; i < 3; i++) {
-            pop_and_free(liste);
+            pop_and_free(list);
         }
 
         return 2;
@@ -226,30 +271,34 @@ int check_pop(Liste *liste) {
     return 0;
 }
 
-int check_remove(Liste *liste) {
+/**
+ * Verify if the list can remove 3 tokens from the ending of the list
+ *
+ * @param list List of token
+ * @return 1 if 3 tokens can be removed, 0 otherwise
+ */
+int check_remove(List *list) {
     Tokens *token;
     int i;
-    if (liste->length < 3) {
+    if (list->length < 3) {
         return 0;
     }
 
-    for (i = liste->length, token = liste->last_element->suivant; i > 3; i--) {
-        token = token->suivant;
+    for (i = list->length, token = list->last_element->next; i > 3; i--) {
+        token = token->next;
     }
-    printf("%s, %s\n", get_form_name_from_enum(token->forme), get_color_name_from_enum(token->couleur));
 
-    if ((token->couleur == token->suivant->couleur) && token->couleur == token->suivant->suivant->couleur) {
-        printf("On remove 3 couleurs\n");
+
+    if ((token->color == token->next->color) && token->color == token->next->next->color) {
         for (i = 0; i < 3; i++) {
-            remove_and_free(liste);
+            remove_and_free(list);
         }
         return 1;
     }
 
-    if ((token->forme == token->suivant->forme) && token->forme == token->suivant->suivant->forme) {
-        printf("On remove 3 formes\n");
+    if ((token->form == token->next->form) && token->form == token->next->next->form) {
         for (i = 0; i < 3; i++) {
-            remove_and_free(liste);
+            remove_and_free(list);
         }
         return 2;
     }
@@ -257,18 +306,25 @@ int check_remove(Liste *liste) {
     return 0;
 }
 
-char *get_form_name_from_enum(Forme forme) {
-    switch (forme) {
-        case CERCLE:
+/**
+ * Get a char of the form's name from the Form enum
+ *
+ * @remark Deprecated, was used for the level 1 of the project to print the lists
+ * @param color Enum form
+ * @return Char of the form's name
+ */
+char *get_form_name_from_enum(Form form) {
+    switch (form) {
+        case CIRCLE:
             return "Cercle";
 
-        case CARRE:
+        case SQUARE:
             return "Carre";
 
         case TRIANGLE:
             return "Triangle";
 
-        case DIAMANT:
+        case DIAMOND:
             return "Diamant";
 
         default:
@@ -276,15 +332,22 @@ char *get_form_name_from_enum(Forme forme) {
     }
 }
 
-char *get_color_name_from_enum(Couleur couleur) {
-    switch (couleur) {
-        case ROUGE:
+/**
+ * Get a char of the color's name from the Color enum
+ *
+ * @remark Deprecated, was used for the level 1 of the project to print the lists
+ * @param color Enum color
+ * @return Char of the color's name
+ */
+char *get_color_name_from_enum(Color color) {
+    switch (color) {
+        case RED:
             return "Rouge";
-        case VERT:
+        case GREEN:
             return "Vert";
-        case BLEU:
+        case BLUE:
             return "Bleu";
-        case JAUNE:
+        case YELLOW:
             return "Jaune";
 
         default:
@@ -292,40 +355,57 @@ char *get_color_name_from_enum(Couleur couleur) {
 
     }
 }
-
-Couleur get_color_from_int(int nbr) {
+/**
+ * Return a enum color from an int
+ *
+ * @param nbr given integer
+ * @return Color color
+ */
+Color get_color_from_int(int nbr) {
     switch (nbr) {
         case 1:
-            return ROUGE;
+            return RED;
         case 2:
-            return VERT;
+            return GREEN;
         case 3:
-            return BLEU;
+            return BLUE;
         case 4:
-            return JAUNE;
+            return YELLOW;
         default:
-            return ROUGE;
+            return RED;
 
     }
 }
 
-Forme get_form_from_int(int nbr) {
+/**
+ * Return a enum form from an int
+ *
+ * @param nbr given integer
+ * @return Form form
+ */
+Form get_form_from_int(int nbr) {
     switch (nbr) {
         case 1:
-            return CERCLE;
+            return CIRCLE;
         case 2:
-            return CARRE;
+            return SQUARE;
         case 3:
             return TRIANGLE;
         case 4:
-            return DIAMANT;
+            return DIAMOND;
         default:
-            return CERCLE;
+            return CIRCLE;
 
     }
 }
 
+/**
+ * Randomly create a new token
+ *
+ * @return Pointer to the new token
+ */
 Tokens *get_random_token() {
-    return allouer_token(get_color_from_int(MLV_get_random_integer(1, 4)),
-                         get_form_from_int(MLV_get_random_integer(1, 4)));
+
+    return allocate_token(get_color_from_int(MLV_get_random_integer(1, 4)),
+                          get_form_from_int(MLV_get_random_integer(1, 4)));
 }
