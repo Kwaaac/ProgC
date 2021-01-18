@@ -59,24 +59,21 @@ void print_info_zone(void *adr) {
 }
 
 int main(int argc, char *argv[]) {
-    int size = atoi(argv[1]);
-    int *tab = allocate_array(size);
-    int *tab2 = allocate_array(size + 5);
+    int size;
+    int *tab, *tab2;
+
+    if(argc < 2){
+        printf("Manque un argument là\n");
+        return 1;
+    }
+
+    size = atoi(argv[1]);
+    tab = allocate_array(size);
 
     fill_array(tab, size);
-    fill_array(tab2, size + 5);
 
     print_array(tab, size);
-    print_array(tab2, size + 5);
-
-    print_info_zone(tab);
-    print_info_zone(tab2);
 
     free(tab);
-    print_info_zone(tab2);
-
-    print_info_zone(tab);
-    print_info_zone(tab2);
-
     return 0;
 }
