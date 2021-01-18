@@ -13,9 +13,6 @@ run: threetogo
 threetogo: $(OBJ)
 	$(CC) -o $@ $^ $(LDFLAGS)
 
-run:
-	./threetogo
-
 .PHONY: clean
 clean:
 	rm -f $(OBJ) threetogo
