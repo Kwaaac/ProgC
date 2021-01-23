@@ -27,14 +27,8 @@ void clear_buffer() {
  */
 int read_input(char *input, int size) {
 
-    char *last_char = NULL;
-
     if (fgets(input, size, stdin) != NULL) {
-        last_char = strchr(input, '\n');
-
-        if (last_char != NULL) {
-            *last_char = '\0';
-        } else {
+        if (strchr(input, '\n') == NULL) {
             clear_buffer();
         }
 
@@ -57,17 +51,17 @@ int read_int(int *res) {
     char input[100];
 
     if (read_input(input, 100) == 0) {
-
         errno = 0;
         verif = strtol(input, &endptr, 10);
-        
+
         /*
          * ERANGE && (LONG_MAX || LONG_MIN) --> The user's input is creating an overflow or an underflow
          * errno != 0 && verif == 0 --> verif == 0 if an error happen during the reading,
          *                              the errno make sure it's an error and not the user who put '0'
          * strlen(endptr) != 0 --> We do not want any char inside the input
          */
-        if ((errno == ERANGE && (verif == LONG_MAX || verif == LONG_MIN)) || (errno != 0 && verif == 0) || strlen(endptr) != 0) {
+        if ((errno == ERANGE && (verif == INT_MAX || verif == INT_MIN)) || (errno != 0 && verif == 0) ||
+            strlen(endptr) != 0) {
             return 0;
         }
 

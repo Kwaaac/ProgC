@@ -1,7 +1,8 @@
 #ifndef _INTERFACE_
 #define _INTERFACE_
 
-#include "../../../CLionProjects/untitled1/stack.h"
+#include "interface.h"
+#include "stack.h"
 
 #define HEIGHT_WINDOWS_PIX 600
 #define WIDTH_WINDOWS_PIX 800

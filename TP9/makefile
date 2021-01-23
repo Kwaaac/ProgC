@@ -1,5 +1,5 @@
 CC=gcc
-FLAGS= -Wall -ansi -pedantic
+FLAGS= -Wall -ansi -pedantic-errors
 OBJ = exo1.o exo2.o exo3.o
 
 %.o: %.c

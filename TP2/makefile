@@ -1,11 +1,12 @@
-CC=gcc
-CFLAGS=-Wall -ansi -pedantic
+CC=@gcc
+CFLAGS=-Wall -ansi -pedantic-errors
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 exo2: exo2.o
 	gcc -o $@ $^
+	@echo Compilation de
 
 exo3: exo3.o
 	gcc -o $@ $^

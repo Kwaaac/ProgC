@@ -1,7 +1,7 @@
 #ifndef _OPERATION_
 #define _OPERATION_
 
-#include "../../../CLionProjects/untitled1/stack.h"
+#include "stack.h"
 #include "interface.h"
 
 int analyse_action(char* str_action);

@@ -22,11 +22,6 @@ Donc selon le make que vous effectuez, préparez vous à devoir taper sur votre 
 `array.o`   --> Compile le array.c<br>
 `read.o`    --> Compile la librairie read.c<br>
 `clean`     --> Clean le projet<br>
-### Test
-L'objectif du TP étant d'avoir une librairie de fonction pour créer et effectué des actions avec des tableaux, l'execution du programme lance des tests.<br>
-Pour la revue il vous sera nécéssaire de lire le code vous-même. Donc vous pouvez profiter des tests pour vérifier des tests de bases que j'ai vérifié.<br>
-Il y a deux types de tests, les tests qui ne nécéssite pas l'action de la personne derrière le clavier et ceux qui la nécéssite.<br>
-Donc selon le make que vous effectuez, préparez vous à devoir taper sur votre clavier pour tester les fonctions.
 
 ## Remerciements
 Merci à Mehdi qui m'a fait remarquer des bétises dans mon code.<br>

@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-Wall -ansi -pedantic
+CFLAGS=-Wall -ansi -pedantic-errors
 LDFLAGS=$(shell pkg-config --libs-only-l MLV)
 DEPS=model.h draw.h
 OBJ=main.o model.o draw.o

@@ -5,8 +5,7 @@
 
 typedef struct stack{
     int values[MAX_SIZE];
-    int max_size;
-    int current_size;
+    int size;
 }Stack;
 
 /* Initialize correctly the stack. */

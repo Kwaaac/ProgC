@@ -6,7 +6,7 @@ ifeq (sudoku,$(firstword $(MAKECMDGOALS)))
   $(eval $(GRID_NAME):;@:)
 endif
 
-CC=gcc
+CC=@gcc
 CFLAGS=-Wall -ansi -pedantic
 OBJ= main.o stack_height.o
 OBJ_ARR= array.o

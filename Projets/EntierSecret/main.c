@@ -68,7 +68,6 @@ int old_main_horrible(int argc, char *argv[]) {
 
     printf("Entrez la limite maximale du nombre secret : ");
     read_user_input(p_max_limit);
-    printf("ALED\n");
 
     *p_nsecret = rand() % (*p_max_limit)++;
 

@@ -6,15 +6,17 @@ ifeq (run,$(firstword $(MAKECMDGOALS)))
   $(eval $(GRID_NAME):;@:)
 endif
 
-CC=gcc
-CFLAGS=-Wall -ansi -pedantic -lMLV
+CC=@gcc
+CFLAGS=-Wall -ansi -pedantic-errors -lMLV
 OBJ= main.o graphic_module.o sudoku.o in_out.o model_module.o
 
 run: exe
-	./exe -s $(GRID_NAME)
+	@echo "Compilation terminée"
+	@echo 'Lancement de la grille pour la grille: $(GRID_NAME)'
+	@./exe -s data/$(GRID_NAME).txt
 
 exe: $(OBJ)
-	$(CC) -o exe $(OBJ) $(CFLAGS)
+	@$(CC) -o exe $(OBJ) $(CFLAGS)
 
 main.o: main.c
 	$(CC) -c main.c -o main.o $(CFLAGS)

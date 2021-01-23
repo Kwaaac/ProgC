@@ -1,66 +1,70 @@
-#include "stack.h"
 #include <stdio.h>
-#include <stdlib.h>
+#include "stack.h"
 
 static Stack stack;
 
 /* Initialize correctly the stack. */
 void stack_init(void) {
-    stack.max_size = MAX_SIZE;
-    stack.current_size = 0;
+    stack.size = 0;
 }
 
 /* Returns the current size of the stack. */
 int stack_size(void) {
-    return stack.current_size;
+    if (stack.size < 0)
+        return 0;
+
+    if (stack.size >= MAX_SIZE)
+        return MAX_SIZE - 1;
+
+    return stack.size;
 }
 
 /* Returns 1 if the stack is empty, returns 0 otherwise. */
 int stack_is_empty(void) {
-    return stack.current_size == 0;
+    return stack.size <= 0;
 }
 
 /* Returns the element at the top of the stack. */
 int stack_top(void) {
-    return stack.values[stack.current_size];
+    return stack.values[stack.size];
 }
 
 /* Pops the element at the top of the stack and returns it. */
 int stack_pop(void) {
-    /* On ne veut pas depasser la taille minimale de la pile */
-    if (stack.current_size == 0) {
-        printf("NAN MAIS CA VA PAS LA TETE\n Depassement inf de la pil");
-        exit(1);
+    int res;
+    /* erreur, on ne peut pas pop une pile vide */
+    if (stack_size() == 0) {
+        return -1;
     }
 
-    int res = stack.values[stack.current_size];
-    stack.current_size--;
+    res = stack_top();
+    stack.size--;
+
     return res;
 }
 
 /* Pushes a given integer `n` at the top of the stack. */
 void stack_push(int n) {
-    /* On ne veut pas depasser la taille de la pile */
-    if (stack.current_size == stack.max_size) {
-        printf("NAN MAIS CA VA PAS LA TETE\n Depassement sup de la pile");
-        exit(1);
+    int size = stack_size();
+
+    if (size == MAX_SIZE) {
+        return;
     }
 
-    stack.current_size++;
-    stack.values[stack.current_size] = n;
+    stack.size++;
+    stack.values[size] = n;
 }
 
 /* Displays the content of the stack on the standard output. */
 void stack_display(void) {
-    printf(">>>Affichage de la pile\n");
-
     int i;
-    for (i = stack.current_size; i > 0; i--) {
-        if (i != 1)
-            printf("%d, ", stack.values[i]);
-        else
-            printf("%d.", stack.values[i]);
+    printf("display\n");
+
+    for (i = stack.size; i > 0; i--) {
+        printf("%d ", stack.values[i]);
     }
+
+    printf("\n");
 }
 
 /* Returns the element at index `index` inside the stack. The user is
@@ -71,32 +75,28 @@ int stack_get_element(int index) {
     return stack.values[index];
 }
 
-int main(int arg, char *argv[]) {
-
+int main(int argc, char *argv[]) {
     stack_init();
-    printf("size %d\n", stack_size()); /* 0 */
-    printf("is empty %d\n", stack_is_empty()); /* 1 */
+    printf("size: %d\n", stack_size());
+    printf("is empty: %d\n", stack_is_empty());
 
     stack_push(5);
-    stack_push(4);
-    stack_push(3);
+    stack_push(6);
     stack_push(2);
-    stack_push(1);
+    stack_push(102);
 
-    printf("size %d\n", stack_size()); /* 5 */
-    printf("is empty %d\n", stack_is_empty()); /* 0 */
+    printf("size: %d\n", stack_size());
+    printf("is empty: %d\n", stack_is_empty());
+
+    printf("top: %d\n", stack_top());
+
+    printf("pop: %d\n", stack_pop());
+
+    printf("size: %d\n", stack_size());
+    printf("is empty: %d\n", stack_is_empty());
+    printf("top: %d\n", stack_top());
 
     stack_display();
-    printf("\ntop %d\n", stack_top()); /* 1 */
-
-    printf("pop %d\n", stack_pop()); /* 1 */
-    printf("pop %d\n", stack_pop()); /* 2 */
-
-    printf("size %d\n", stack_size()); /* 3 */
-    printf("is empty %d\n", stack_is_empty()); /* 0 */
-
-    stack_display();
-
 
     return 0;
 }

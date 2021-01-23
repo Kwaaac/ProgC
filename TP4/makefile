@@ -1,15 +1,13 @@
-CC=gcc
+CC=@gcc
 CFLAGS=-Wall -ansi -pedantic-errors
 
 %.o: %.c
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-exo1: exo1.o
+main: stack.o
 	gcc -o $@ $^
-
-exo4: exo4.o
-	gcc -o $@ $^
+	@echo Compilation effectuée
 
 .PHONY: clean
 clean:
-	rm -f *.o exo1 exo4
+	rm -f *.o exo2 exo3 exo5
