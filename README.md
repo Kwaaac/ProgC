@@ -1,5 +1,26 @@
+# Table des matières
+1. [Introduction](#introduction)
+2. [Qui suis-je, d'où viens-je ?](#qui-suis-je-doù-viens-je-)
+3. [Mes objectifs pour progresser](#mes-objectifs-pour-progresser)
+4. [C’est parti pour les TP](#cest-parti-pour-les-tp)
+    1. [TP2](#tp2)
+    2. [TP3](#tp3)
+    3. [”Librairie” read](#librairie-read)
+    4. [Projet d’entier secret !](#projet-dentier-secret-)
+    5. [TP4](#tp4)
+    6. [TP5](#tp5)
+    7. [TP6](#tp6)
+    8. [TP7](#tp7)
+    9. [TP9](#tp9)
+    10. [TP8](#tp8)
+    11. [Projet Three To Go](#projet-three-to-go)
+5. [Review et aide](#review-et-aide)
+6. [Conclusion](#conclusion)
+    1. [Points total accumulé](#points-total-accumulé)
 
-# INTRODUCTION
+
+
+# Introduction
 Bonjour à vous, cher lecteur. Ce document va vous compter l’aventure qu’a été ce premier semestre de programmation C au cours de ma première année à l’ESIPE.
 
 Pour cela je vais procéder d’une manière très simple qui s’agira de vous présenter l’origine de mes expériences ainsi que le niveau en C que j’ai quitté au troisième semestre de mon DUT. Ensuite je vous présenterai les réalisations que j’ai effectué ce semestre tout en vous explicitant ce que j’y ai appris et les compétences que je considère comme acquises, celle qu’il faut que je travaille et enfin les fameuses compétences qui restent un mystère pour moi.
@@ -306,7 +327,7 @@ Et bien entendu, mes deux exercices sont leaks free !
 | TP9 | 10 | 1 | 1 | 1 |  | 1 |  | 2 | 1 | 1 | 2 | 
 
 
-[TP8]()
+## [TP8](https://github.com/Kwaaac/ProgC/tree/main/TP8)
 
 Le TP8 était intéressant à faire et j’ai beaucoup apprécié appliquer la mémoïsation mais je ne pense pas que je maîtrise ce principe ni même si je vais le réutiliser dans des projets futurs.
 J’ai suivi le tp “à la lettre” en implémentant l’algorithme, et il m’a permis de continuer à mettre en pratique les connaissances que j’ai acquises jusqu’ici.
