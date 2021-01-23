@@ -1,7 +1,7 @@
 # Rapport de relecture de code
 
-Production soumise à la relecture : **TP6**
-Projet/code produit par **Robin RIEUTORD**
+Production soumise à la relecture : **TP6**<br>
+Projet/code produit par **Robin RIEUTORD**<br>
 Relecture opérée par **Maxime RODRIGUEZ** le 10 janvier 2021
 
 ## Concision et propreté des rendus
