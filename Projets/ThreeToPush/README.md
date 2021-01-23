@@ -11,7 +11,7 @@ J'ai réaliser le niveau 1 et la moitié du niveau 2
 Ce qui rend le jeu de base parfaitement jouable.
 Mais pas de gestion de score ou de temps de jeu, si vous voulez stopper, il faut quitter manuellement.
 
-##Contrôles
+## Contrôles
 Clic gauche envois le token à gauche, clic droit envois le token à droite.
 
 ## Makefile 
