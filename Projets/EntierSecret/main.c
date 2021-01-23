@@ -5,7 +5,7 @@
 #include "../../lib/read.h"
 
 /**
- * Use this function with 
+ * If an error is given (0), print a message for the user
  */
 int read_error_handler(int err) {
     if (err == 0) {
@@ -15,6 +15,11 @@ int read_error_handler(int err) {
     return err;
 }
 
+/**
+ * Read user input and tell the user if anything failed
+ *
+ * @param number Pointer by reference to the number
+ */
 void read_user_input(int *number) {
     int check;
     do {
@@ -22,17 +27,24 @@ void read_user_input(int *number) {
     } while (check == 0);
 }
 
-int is_number_found(int *p_nsecret, int *p_nuser) {
-    if (*p_nsecret < *p_nuser) {
+/**
+ * Check if the number given is correct and give info to the user
+ *
+ * @param p_nsecret secret number
+ * @param p_nuser user number
+ * @return 1 if the user found the number, 0 otherwise
+ */
+int is_number_found(int p_nsecret, int p_nuser) {
+    if (p_nsecret < p_nuser) {
         printf("Votre nombre est trop grand\n");
-        return 1;
-    } else if (*p_nsecret > *p_nuser) {
+        return 0;
+    } else if (p_nsecret > p_nuser) {
         printf("Votre nombre est trop petit\n");
-        return 1;
+        return 0;
     }
 
     printf("Bravo vous avez gagné !\n");
-    return 0;
+    return 1;
 }
 
 /**
@@ -63,8 +75,8 @@ int old_main_horrible(int argc, char *argv[]) {
     printf("Essayer de le retrouver: ");
     do {
         read_user_input(p_nuser);
-        win = is_number_found(p_nsecret, p_nuser);
-    } while (win != 0);
+        win = is_number_found(*p_nsecret, *p_nuser);
+    } while (win == 0);
 
     return 0;
 }
@@ -88,8 +100,8 @@ int main(int argc, char *argv[]) {
     printf("\nEssayez de le retrouver: ");
     do {
         read_user_input(number_user);
-        win = is_number_found(number_secret, number_user);
-    } while (win != 0);
+        win = is_number_found(*number_secret, *number_user);
+    } while (win == 0);
 
     free(number_secret);
     free(max_limit);
