@@ -38,7 +38,7 @@ Donc à partir de là, les objectifs étaient fixés donc j’ai pu commencer da
 # C’est parti pour les TP:
 Pour la nomenclature, je vais, pour chaque TP, expliciter ce que j’y ai fait, ce que je pense avoir appris, et ce que je vais avoir besoin de revoir. Je mettrai aussi une auto-évaluation sur ce que je pense avoir eu comme compétence selon les grilles de points trouvable à cette page : 
 
-## TP2:
+## [TP2](https://github.com/Kwaaac/ProgC/tree/main/TP2):
 Le TP2 a servi de rappel sur comment coder basiquement en C.
 J’ai pu revoir certaines bases que j’avais complètement oublié comme bêtement les paramètres du main et l’utilisation de argc et argv grâce à l’exercice 2.
 
