@@ -2,7 +2,7 @@
 1. [Introduction](#introduction)
 2. [Qui suis-je, d'où viens-je ?](#qui-suis-je-doù-viens-je-)
 3. [Mes objectifs pour progresser](#mes-objectifs-pour-progresser)
-4. [C’est parti pour les TP](#cest-parti-pour-les-tp)
+4. [Mes productions](#mes-productions)
     1. [TP2](#tp2)
     2. [TP3](#tp3)
     3. [”Librairie” read](#librairie-read)
@@ -21,42 +21,44 @@
 
 
 # Introduction
-Bonjour à vous, cher lecteur. Ce document va vous compter l’aventure qu’a été ce premier semestre de programmation C au cours de ma première année à l’ESIPE.
+Bonjour à vous, cher lecteur. Ce document va vous vous décrire mon premier semestre de programmation C au cours de ma première année à l’ESIPE.
 
-Pour cela je vais procéder d’une manière très simple qui s’agira de vous présenter l’origine de mes expériences ainsi que le niveau en C que j’ai quitté au troisième semestre de mon DUT. Ensuite je vous présenterai les réalisations que j’ai effectué ce semestre tout en vous explicitant ce que j’y ai appris et les compétences que je considère comme acquises, celle qu’il faut que je travaille et enfin les fameuses compétences qui restent un mystère pour moi.
+Pour cela je vais procéder d’une manière qui s’agira de vous présenter l’origine de mes expériences ainsi que le niveau en C que j’ai quitté au troisième semestre de mon DUT. Ensuite je vous présenterai les réalisations que j’ai effectué ce semestre tout en vous explicitant ce que j’y ai appris et les compétences que je considère comme acquises, celle qu’il faut que je travaille et enfin les fameuses compétences qui restent un mystère pour moi.
 Donc je terminerais sur une conclusion sur ce que j’ai majoritairement retenu de ce premier semestre et surtout mes objectifs de réalisation concernant le prochain semestre !
+Je passerais également en revue les review et aide que l'on m'a apporté et celle que j'ai apportés. Pour les reviews et les aides, je les mettrais sur les réalisation des TPs.
 
 Une dernière note avant de vous laisser commencer, je tiens à rappeler que ce portfolio est présent aussi sur github si vous le lisez en version PDF. La version github est en Markdown et va surtout permettre de lier les différents projets (voir Commits) dont je parle.
 
 Sur ce, je vous souhaite une bonne lecture !
 
 # Qui suis-je, d'où viens-je ?
-Comme dit précédemment, je proviens d’un DUT Informatique, celui de Champ pour être précis, donc j’ai suivi les enseignements d’à côté, oui, mais pas vraiment.
+Comme dit précédemment, je proviens d’un DUT Informatique, celui de Champ pour être précis.
 
-Nous n’apprenons pas véritablement à coder en C dans ce DUT, ou du moins pas avec autant de rigueur qu’à l’ESIPE, et on nous a surtout appris à faire de petit programmes, nous traumatiser avec une utilisation bien trop pousser du scanf pour des utilisations pas adapté.
+Nous n’apprenons pas véritablement à coder en C dans ce DUT, ou du moins pas avec autant de rigueur qu’à l’ESIPE, et on nous a surtout appris à faire de petit programmes, des petits TP qui cherchent à nous faire voir des bases, mais que j'ai mal apprises et avec difficultés.
 En bref, la première année nous a appris un minimum de syntaxe en C, mais pas vraiment appris les “bonnes manières”.
 
-Ensuite, nous avons refait du C au troisième semestre, cette fois-ci, nous avons utilisé le C à des fin algorithmiques (Liste chainées, doublement chaînées, tables de hachages), mais ça à été un calvaire car pas de cours “propre” de C, (aucune utilisation de Makefile par exemple). Donc pour être franc mon niveau en C à la fin de ce semestre était correct, mais je savais juste écrire du code que je pensais faire fonctionner, je ne connaissais aucune notion théorique et propre au C.
+Ensuite, nous avons refait du C au troisième semestre, cette fois-ci, nous avons utilisé le C à des fin algorithmiques (Piles, Liste chainées, doublement chaînées, tables de hachages), mais ça à été un calvaire car nous avons manqué selon moi de cours “propre” de C, (aucune utilisation de Makefile par exemple). Donc pour être franc mon niveau en C à la fin de ce semestre était correct, mais je savais juste écrire du code que je pensais faire fonctionner, je ne connaissais aucune notion théorique et propre au C.
 
-Et comme je n’avais pas du tout apprécié ce cours, suivi d’une année d’abstinence de C, je suis arrivé à l’ESIPE avec une petite rancoeur avec le C et des trous de mémoire volontaires.
+Et comme je n’avais pas du tout apprécié ce cours, suivi d’une année d’abstinence de C, je suis arrivé à l’ESIPE avec une petite rancoeur avec le C et un tri selectif sur mes connaissance vis à vis du C.
 
-Donc plus sérieusement, pour résumer mon niveau en C au début de ce semestre, je ne savais plus comment compiler un fichier avec GCC, je connaissais la syntaxe du C, mais dès que ça rentrait en profondeur dans certaines notions (pointeurs, bonne gestion des tableaux, malloc…). En bref, malgré mes notions de base en C, je me sentais véritablement perdu.
+Donc plus sérieusement, pour résumer mon niveau en C au début de ce semestre, je ne savais plus comment compiler un fichier avec GCC, je connaissais la syntaxe du C, mais dès que ça rentrait en profondeur dans certaines notions (pointeurs, bonne gestion des tableaux, malloc…) je commençais à perdre mes repères et je ne savais pas comment procéder. En bref, malgré mes notions de base en C, je me sentais véritablement perdu.
 
 # Mes objectifs pour progresser
 
+A ce stade, j’ai plusieurs objectifs en tête, le premier c’est de récupérer un tant soit peu le peu de niveau que j’avais en C à l’époque en refaisant les premier TP, avant de bien comprendre le cours pour avoir les bases théoriques que je n’avais pas à l’époque. Donc pour cela, faites quelques exercices du TP2 et du TP3.
 
-A ce stade, j’ai plusieurs objectifs en tête, le premier c’est de récupérer un tant soit peu le peu de niveau que j’avais en C à l’époque en refaisant quelques algorithmes, avant de bien comprendre le cours pour avoir les bases théoriques que je n’avais pas à l’époque. Donc pour cela, faites quelques exercices du TP2 et du TP3.
-
-L’idée est après avoir repris mes marques, d’apprendre à utiliser les Makefiles car je ne les avaient jamais utiliser (J’utilise l’IDE Clion qui utilise le Cmake et avec une syntaxe simplifié, me permettait de compiler et d'exécuter mes sources). Donc apprendre comment rédiger mais surtout lire un Makefile afin que tout le monde puisse compiler mes sources était extrêmement important pour la suite si je souhaitais pouvoir avoir des review.
+L’idée est après avoir repris mes marques, d’apprendre à utiliser les Makefiles car je ne les avaient jamais utiliser (J’utilise l’IDE Clion qui utilise le Cmake et avec une syntaxe simplifié, me permettait de compiler et d'exécuter mes sources). Donc apprendre comment rédiger mais surtout lire un Makefile afin que tout le monde puisse compiler mes sources. C'était extrêmement important pour la suite si je souhaitais pouvoir avoir des review et en faire.
 
 Ensuite l’objectif est simple, continuer les TP fils rouges car je n’ai pas la prétention de pouvoir choisir mes TP au vu du niveau que j’avais. 
 
-Ceci dit, j’avais tout de même d’autres idées en tête, j’avais fait une fonction --récupérée sur internet et adaptée pour mes besoins-- l’année dernière pour lire un int sur l’entrée standard. Mais elle était horrible car je ne maîtrisais pas le passage par adresse donc je voulais la refaire correctement pour la suite des TP.
+Ceci dit, j’avais tout de même d’autres idées en tête, j’avais fait une fonction --récupérée sur internet et adaptée pour mes besoins-- l’année dernière pour lire un entier sur l’entrée standard. Mais elle était horrible car je ne maîtrisais pas le passage par adresse donc je voulais la refaire correctement pour la suite des TP.
 
 Puis surtout je souhaitais au moins commencer un projet quel qu'il soit si je pouvais me le permettre.
 
 Donc à partir de là, les objectifs étaient fixés donc j’ai pu commencer dans de bonnes conditions.
-# C’est parti pour les TP:
+
+
+# Mes productions:
 Pour la nomenclature, je vais, pour chaque TP, expliciter ce que j’y ai fait, ce que je pense avoir appris, et ce que je vais avoir besoin de revoir. Je mettrai aussi une auto-évaluation sur ce que je pense avoir eu comme compétence selon les grilles de points trouvable à cette [page](http://igm.univ-mlv.fr/~borie/projet_info1.php).
 
 ## [TP2](https://github.com/Kwaaac/ProgC/tree/main/TP2):
@@ -91,7 +93,7 @@ Donc en somme sur ce TP je suis un peu tombé sur un os, donc il fallait que je 
 
 
 ## [”Librairie” read](https://github.com/Kwaaac/ProgC/tree/main/lib)
-Mentionné plus haut, j’avais l’an passé adapté des fonctions de lecture d’entrée standard pour mes TP (de mémoire c’était un petit jeu au tour par tour et donc lire les entrées de chaque joueur).
+Comme mentionné plus haut, j’avais l’an passé adapté des fonctions de lecture d’entrée standard pour mes TP (de mémoire c’était un petit jeu au tour par tour et donc lire les entrées de chaque joueur).
 
 J’avais besoin d’avoir une vérification de l’entrée et d’assurer si les entrées contenait uniquement des entiers. Et j’avais finalisé une solution à moitié stable et bien horrible puisque, ne maîtrisant pas du tout le passage par adresse, si ma valeur de retour était l’int le plus petit possible alors je considérais que ce n’était pas bon (pour vous dire à quel point c’était horrible).
 
@@ -116,8 +118,7 @@ J’ai réutilisé cette petite librairie tout au long de mon semestre et il fau
 
 Je pense qu’il y a moyen de peut-être faire plus simple voir de l’optimiser, mais je suis assez content de ce que j’ai fait la dessus.
 
-Et faire ça m’a ouvert la voie pour faire le petit projet d’entier secret !
-
+Et ça m’a ouvert la voie pour faire le petit projet d’entier secret !
 
 | Projet | Pts | I/0 | Type | Progr | Module | Compil | Récursion | Tableaux | Pointeurs | Structures | Allocation | Fichier | Bit à bit | Fct Pointer | Biblio |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -141,7 +142,7 @@ int *p_max_limit = &max_limit;
 /* ... */
 read_user_input(p_max_limit);
 ```
-Donc j’ai corrigé ça de manière à ce que ça soit plus joli et en prime, de faire un petit malloc & free.
+Donc j’ai corrigé ça de manière à ce que ça soit plus joli et en prime, de faire un malloc & free.
 
 ```c
 int *max_limit = (int *) malloc(sizeof(int));
@@ -153,6 +154,7 @@ Vous pourrez retrouver l’ancien main et le nouveau dans le programme.
 Donc au moins je sais que j’ai manifestement progresser sur ce plan là, c’est positif !
 
 Finalement, ce projet était surtout pour tester ma librairie et ce fut un bon crash test car selon moi, elle fonctionne plutôt bien !
+De plus j'ai correctement atomiser les fonctions pour avoir un main léger et un retour du programme vers l'utilisateur le plus complet possible
 
 | Projet | Pts | I/0 | Type | Progr | Module | Compil | Récursion | Tableaux | Pointeurs | Structures | Allocation | Fichier | Bit à bit | Fct Pointer | Biblio |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -167,7 +169,7 @@ Je n’ai rien fait d’exceptionnel pour faire la pile, j’ai suivis le TP et 
 
 J’ai cependant mieux compris comment fonctionnait l’utilisation des tableaux en C avec la pile, parce que c’est en utilisant et en pratiquant que je comprend les choses.
 
-Nous avions fait un TP similaire en première de DUT si je ne me trompe pas.
+Nous avions fait un TP similaire en première de DUT.
 
 Même chose pour ce qui est de la lecture de la calculatrice et son implémentation.
 Je n’ai pas ressenti de difficulté de lire le code, d’y implémenter mes fichiers stack et de le modifier pour ajouter les deux fonction de modulo et de factoriel
@@ -183,7 +185,7 @@ Mais après coup, je me dis que je n’avais peut-être pas besoin de faire ce T
 
 ## [TP5](https://github.com/Kwaaac/ProgC/tree/main/TP5)
 
-Le TP5 à été vraiment excellent pour moi. J’avais des problèmes avec les tableaux parce que j’avais l’impression de ne pas comprendre comment ils fonctionnaient en termes d’initialisation et d’utilisation en pointeur dans des fonctions.
+Le TP5 à été vraiment excellent pour moi. J’avais des problèmes avec les tableaux parce que j’avais l’impression de ne pas comprendre comment ils fonctionnaient en termes d’initialisation et en passage par adresse.
 
 Ce TP a le grand avantage de tout revoir et de tout utiliser sur les tableaux, et fait un très bon exercice et m’a permis de grandement progresser sur ce plan là.
 
@@ -210,7 +212,7 @@ void push_array(int *first, int *second, int first_index, int second_index, int 
 }
 ```
 
-Cette fonction va, comme l’indique le commentaire, de push tout un tableau dans un autre, avec une gestion des index. 
+Cette fonction va, comme l’indique le commentaire, push tout un tableau dans un autre, avec une gestion des index. 
 Cette fonction est extrêmement utile et est souvent utilisé pour remplacer des boucle for intempestives
 
 Dans cette version, je n’avais pas gérer les erreurs, ni des test et le makefile n’était pas clair.
@@ -219,11 +221,11 @@ Puis Guillaume DOMART à fait la revue [#3](https://github.com/Kwaaac/ProgC/issu
 Dans l’issue Git, vous pourrez retrouver le commit [5c33148](https://github.com/Kwaaac/ProgC/commit/5c33148b50388ad7f924be6c0eed7fba6e1935c4) qui contient une description de mes modifications suite à la review et toutes mes modifications qui vont avec.
 En résumé j’ai pousser les tests de mes fonctions dans le main, et j’ai véritablement gérer les erreurs dans la fonction fill array pour empêcher l’ajout de nombres négatifs ce qui rend son utilisation *normalement* impossible à rater.
 
-Et en prime j’ai pu mettre à profit la création de Makefile et m’amuser un peu avec.
+Et en prime j’ai pu mettre à profit la création de Makefile.
 
 En somme, ce TP m’a permis de grandement progresser sur l’utilisation des tableaux, la gestion des erreurs, la factorisation de code, une gestion des tests avec des arguments données et sur l’utilisation des Makefiles.
 
-Si il y a une chose dont je suis sûr à ce stade d’une chose c’est que je pense avoir maîtrisé le principe des fonctions en C.
+Si il y a une chose dont je suis sûr à ce stade c’est que je pense avoir maîtrisé le principe des fonctions, des types et des variables en C.
 
 
 | Projet | Pts | I/0 | Type | Progr | Module | Compil | Récursion | Tableaux | Pointeurs | Structures | Allocation | Fichier | Bit à bit | Fct Pointer | Biblio |
@@ -261,7 +263,7 @@ Pour le débogage, ça m’a énormément servi donc j’en suis plutôt content
 
 J’utilise à nouveau le passage par adresse pour initialiser des pointeur de int et la fonction renvoi un code d’erreur, c’est une notion que j’ai assimilé désormais et que je réutilise de manière naturel (et que je réaliserai plus tard, pour le tp7 et projet).
 
-Guillaume DOMART à réaliser une review assez positive sur ce TP également que vous pouvez retrouver ici : #4
+Guillaume DOMART à réaliser une review assez positive sur ce TP également que vous pouvez retrouver ici : [#4](https://github.com/Kwaaac/ProgC/issues/4)
 
 Finalement ce TP m’a permis de consolider ce que j'apprends depuis quelques TP et de continuer à mettre en pratique mes nouvelles connaissances !
 
@@ -275,9 +277,9 @@ Finalement ce TP m’a permis de consolider ce que j'apprends depuis quelques TP
 
 Il y a deux types de personnes qui ont réalisé ce TP, ceux qui ont pu réutiliser le TP3 d’algo qui utilise une structure et un affichage similaire aux sudoku et qui ont utilisé cette base pour faire le TP7. 
 
-Et il y a moi qui l’ai fait avant qu’on fasse le TP3 et qui à créer la structure lui-même.
+Dans mon cas je l’ai fait avant qu’on fasse le TP3 et qui à créer la structure lui-même.
 
-Dans un sens je me dis que j’aurai pu gagner pas mal de temps pour faire d’autre TP, mais dans l’autre, je suis quand même très satisfait d’avoir pu sortir une structure qui me semble satisfaisante et qui en plus ressemblait au code du TP
+Dans un sens je me dis que j’aurai pu gagner pas du temps pour faire d’autre TP, mais dans l’autre, je suis quand même très satisfait d’avoir pu sortir une structure qui me semble satisfaisante et qui en plus ressemblait au code du TP.
 
 J’ai donc fait deux structures, une pour la grille de sudoku et une pour les cellules. 
 
@@ -286,14 +288,14 @@ En fait j’avais préparé ma structure pour ajouter la fonctionnalité de HOVE
 
 J’ai aussi modifier les lignes pour mettre en lumière les régions et j’ai augmenté la font.
 
-Une petite “astuce” que j’ai apprécié rajouter c’est la gestion des clicks sur une grille.
+Une petite “astuce” que j’ai apprécié rajouter c’est la gestion des clics sur une grille.
 Ma fonction me permet de sortir les index de la cellule sur laquelle le joueur à cliquer, selon une grille de sudoku (la structure). Grâce à ça, je peux changer la taille de ma grille en termes de pixel ou de case et la fonction est parfaitement polyvalente. 
 
 De plus ça m’a permis d’utiliser cette structure pour la grille de sélection, je peux la poser n’importe ou dans la fenêtre et un clic dessus renverra toujours la bonne cellule sélectionnée.
 
 Le seul point faible de ça, c’est que j’ai dû faire un fichier texte pour initialiser une “grille de sudoku” qui est en fait la grille de sélection.
 
-Sur ce plan là, j’ai pu fortement progresser et mettre en application ce que j'apprends depuis 2 ans pour faire un petit jeu et avec ça réutiliser ce que j’ai fait au TP précédent pour solver le sudoku.
+Sur ce plan là, j’ai pu fortement progresser et mettre en application ce que j'apprends depuis le début de ce semestre pour faire un petit jeu et avec ça réutiliser ce que j’ai fait au TP précédent pour solver le sudoku.
 
 A ce stade, je n’avais pas du tout utiliser de malloc et de free et mon code était manifestement une passoire à mémoire (presque autant que la libmlv tient).
 
@@ -318,8 +320,25 @@ Pour ce qui est de l’exercice 2, j’ai pu mettre en place l’exercice sans t
 
 Et le deuxième exercice à été super intéressant parce que j’ai pu appliquer ce que j’avais copié du tp d’algo, mais cette fois sans avoir la réponse, j’ai pu recommencer du début ce qui m’assure que si je dois réutiliser de l’allocation et du free, je saurai l’utiliser sans trop de problème ! 
 
+Le troisème exercice à été un peu compliqué car j'ai eu des bugs que je ne comprenais pas du à ma mauvaise manière de copié les tableaux, j'effectuait mal le size des chaîne de caractère et ça c'est répercutés par une erreur sur le free que je ne comprenais pas.
+
+Comme demandé dans l'énoncé, il faut toujours adapter le malloc de l'argument au plus petit possible. Pour cela j'ai utiliser la librairie <string.h> pour avoir la longueur de chaque chaîne de caractère puis de le multiplié par son sizeof.
+
+Pour pouvoir copier les arguments dans un autre tableaux, j'ai fait appel à memcpy qui permet de copier les zones mémoires, donc la méthode que j'ai trouvé être la plus efficase pour copier un tableau de char. Comme un tableau est une suite de zone mémoire, c'est ce qui me paraît le plus adapté puisque que j'ai tout malloc et que j'ai la taille allouée.
+```c
+size = strlen(argv[i]) * sizeof(char);
+        tab[i] = (char *) malloc(size);
+
+        if (tab[i] == NULL) {
+            fprintf(stderr, "Memory allocation error, %d", i);
+            return NULL;
+        }
+
+        memcpy(tab[i], argv[i], size);
+```
+
 Je ne me suis pas encore attardé sur le dernier exercice pour véritablement comprendre comment fonctionne malloc et free, j’ai une petite conception grâce aux cours d’architectures système, mais je n’ai pas encore pris le temps de regarder en profondeur.
-Et bien entendu, mes deux exercices sont leaks free !
+Et bien entendu, mes trois exercices sont leaks free !
 
 
 | Projet | Pts | I/0 | Type | Progr | Module | Compil | Récursion | Tableaux | Pointeurs | Structures | Allocation | Fichier | Bit à bit | Fct Pointer | Biblio |
@@ -359,7 +378,7 @@ Mais je suis très content du résultat, les fonctions sont bien atomique et n�
 
 Grâce à cette modularité, le main du jeu est très court et concis.
 
-Bien entendu, j’ai pu mettre en œuvre les nouvelles connaissances sur les malloc et les free pour bien allouer et free mes structures. Dommage que la lib mlv fasse autant de fuite mémoire (même un create_window → free(window) fait des fuites de mémoire).
+Bien entendu, j’ai pu mettre en œuvre les nouvelles connaissances sur les malloc et les free pour bien allouer et free mes structures. Dommage que la libmlv fasse autant de fuite mémoire (même un create_window → free(window) fait des fuites de mémoire).
 
 Je compte continuer ce projet pour le deuxième semestre et terminer le niveau 3 avec peut-être d’autres fonctionnalités en fonction de la charge de travail.
 Ceci dit j’ai déjà deux pistes d'amélioration dans ce projet.
