@@ -27,8 +27,6 @@ Pour cela je vais procéder d’une manière qui s’agira de vous présenter l�
 Donc je terminerais sur une conclusion sur ce que j’ai majoritairement retenu de ce premier semestre et surtout mes objectifs de réalisation concernant le prochain semestre !
 Je passerais également en revue les review et aide que l'on m'a apporté et celle que j'ai apportés. Pour les reviews et les aides, je les mettrais sur les réalisation des TPs.
 
-Une dernière note avant de vous laisser commencer, je tiens à rappeler que ce portfolio est présent aussi sur github si vous le lisez en version PDF. La version github est en Markdown et va surtout permettre de lier les différents projets (voir Commits) dont je parle.
-
 Sur ce, je vous souhaite une bonne lecture !
 
 # Qui suis-je, d'où viens-je ?
