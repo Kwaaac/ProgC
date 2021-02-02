@@ -131,8 +131,8 @@ Pour cela j’ai évidemment utilisé la librairie créer au dessus avec une ges
 
 J’ai donc découpé le programme en plusieurs sous-fonction atomique ayant chacune leurs propre action unique.
 
-Je n’ai rien créé de particulièrement révolutionnaire sur ce projet, par contre, j’y suis retourné à la fin du semestre.
-Je l’ai regretté.
+Je n’ai rien créé de particulièrement révolutionnaire sur ce projet, par contre, j’y suis retourné à la fin du semestre.<br>
+Je l’ai regretté.<br>
 Plus exactement je me suis rendu compte à quel point je ne maîtrisait pas les pointer, petit exemple de ma boucherie: 
 ```c
 int max_limit;
