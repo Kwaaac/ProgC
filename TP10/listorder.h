@@ -2,6 +2,7 @@
 #define TP10_LISTORDER_H
 
 #include <stdio.h>
+#include <stdlib.h>
 
 typedef struct cell{
     char* first_name;
@@ -19,6 +20,8 @@ int name_order(Cell*p1, Cell* p2);
 void ordered_insertion(List* list, Cell* new, int order_func(Cell*, Cell*));
 
 void print_list(List list);
+
+void print_cell(Cell* cell);
 
 void free_list(List list);
 
