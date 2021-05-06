@@ -3,6 +3,6 @@
 
 #include "listorder.h"
 
-int fread_list(const char *file, List list);
+int fread_list(const char *file, Cell *list);
 
 #endif //TP10_IN_OUT_H
