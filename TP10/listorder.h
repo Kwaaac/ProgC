@@ -11,7 +11,7 @@ typedef struct cell{
     char* last_name;
     int age;
     struct cell* next;
-}Cell, *List;
+}Cell;
 
 /**
  * Allocate a new cell
@@ -31,17 +31,19 @@ int age_order(Cell* p1, Cell* p2);
  */
 int name_order(Cell*p1, Cell* p2);
 
-void ordered_insertion(List *list, Cell* new, int order_func(Cell*, Cell*));
+Cell *ordered_insertion(Cell *list, Cell* new, int order_func(Cell*, Cell*));
 
 int compare_age_then_name(Cell *p1, Cell *p2);
 
+int compare_name_then_age(Cell *p1, Cell *p2);
+
 /* Prints every cell of the list */
-void print_list(List list);
+void print_list(Cell* list);
 
 /* Print the cell */
 void print_cell(Cell* cell);
 
 /* Free the whole list */
-void free_list(List list);
+void free_list(Cell* list);
 
 #endif //TP10_LISTORDER_H

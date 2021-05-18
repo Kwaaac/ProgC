@@ -4,11 +4,13 @@
 Cell *allocate_cell(char *first, char *last, int age) {
     Cell *cell = (Cell *) malloc(sizeof(Cell));
 
-    cell->first_name = first;
-    cell->last_name = last;
-    cell->age = age;
+    cell->first_name = (char *) malloc((strlen(first) + 1) * sizeof(char));
+    strcpy(cell->first_name, first);
 
-    printf("%s, %s, %d\n", first, last, age);
+    cell->last_name = (char *) malloc((strlen(last) + 1) * sizeof(char));
+    strcpy(cell->last_name, last);
+
+    cell->age = age;
 
     return cell;
 }
@@ -53,29 +55,33 @@ int compare_name_then_age(Cell *p1, Cell *p2) {
     return res;
 }
 
-void ordered_insertion(List *list, Cell *new, int order_func(Cell *, Cell *)) {
+
+Cell *ordered_insertion(Cell *list, Cell *new, int order_func(Cell *, Cell *)) {
     Cell *pred;
 
-    if (*list == NULL) {
-        *list = new;
-        return;
+    if (list == NULL) {
+        list = new;
+        return list;
     }
 
-    pred = *list;
-
-    if (pred->next == NULL) {
-        if (order_func(pred, new) < 0) {
-            new->next = pred;
-            *list = new;
-        } else {
-            pred->next = new;
-        }
-    } else {
-        ordered_insertion(list, new, order_func);
+    if (order_func(list, new) > 0) {
+        new->next = list;
+        list = new;
+        return list;
     }
+
+    /* We catch the the good position of our new element in the list */
+    for (pred = list;
+         pred->next != NULL && !(order_func(pred, new) <= 0 && order_func(pred->next, new) >= 0); pred = pred->next);
+
+    new->next = pred->next;
+    pred->next = new;
+
+    return list;
 }
 
-void free_list(List list) {
+
+void free_list(Cell *list) {
     if (list->next != NULL) {
         free_list(list->next);
     }
@@ -88,7 +94,7 @@ void print_cell(Cell *cell) {
     printf("Age: %d yrs\n", cell->age);
 }
 
-void print_list(List list) {
+void print_list(Cell *list) {
     if (list != NULL) {
         print_cell(list);
     }
@@ -99,9 +105,11 @@ void print_list(List list) {
 }
 
 int main() {
-    List list = NULL;
+    Cell *list = NULL;
 
-    fread_list("../liste_nom.txt", list);
+    fread_list("../liste_nom.txt", &list);
+
+    print_list(list);
 
     return 0;
 }
