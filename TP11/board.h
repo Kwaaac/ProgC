@@ -19,10 +19,10 @@ typedef struct plateau {
     Carre **bloc;
     Carre *black_bloc;
 
-    MLV_Image* solution;
+    MLV_Image *solution;
 } Plateau;
 
-Plateau *allocate_plateau(int height, int width);
+Plateau *allocate_plateau(MLV_Image *image, int height, int width);
 
 void init_plateau(Plateau *p);
 
@@ -36,8 +36,12 @@ void free_plateau(Plateau *p);
  */
 int check_win(Plateau *p);
 
-Carre* swap_blocs(Carre *black_bloc, Carre *c2);
+Carre *swap_blocs(Carre *black_bloc, Carre *c2);
 
 void randomize_plateau(Plateau *p);
+
+int from_coordinates_to_cell_index(Plateau *p, int *x, int *y);
+
+int can_swap_blocs(Carre c, Carre *black_bloc);
 
 #endif /*TP11_BOARD_H*/

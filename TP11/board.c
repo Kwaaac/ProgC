@@ -28,8 +28,11 @@ void free_bloc_array(Carre **c, int size) {
  *
  * @return A new Board
  */
-Plateau *allocate_plateau(int height, int width) {
+Plateau *allocate_plateau(MLV_Image *image, int height, int width) {
     int i, j;
+    int img_width = MLV_get_image_width(image) / width;
+    int img_height = MLV_get_image_height(image) / height;
+    MLV_Image *tmp;
 
     Plateau *p = (Plateau *) malloc(sizeof(Plateau));
     assert(p != NULL);
@@ -43,11 +46,16 @@ Plateau *allocate_plateau(int height, int width) {
         p->bloc[i] = (Carre *) malloc(sizeof(Carre) * width);
     }
 
+    p->solution = image;
+
     for (i = 0; i < height; i++) {
         for (j = 0; j < width; j++) {
+            tmp = MLV_copy_partial_image(image, j * img_height, i * img_width, img_width, img_height);
+
             p->bloc[i][j].lig = i;
             p->bloc[i][j].col = j;
             p->bloc[i][j].weight = i * width + j;
+            p->bloc[i][j].image_bloc = tmp;
         }
     }
 
@@ -171,7 +179,6 @@ void associate_move_to_bloc(Carre *black_bloc, int move, int *move_lig, int *mov
 void randomize_plateau(Plateau *p) {
     int i, move, move_lig, move_col;
     for (i = 0; i < MOVE_NBR; i++) {
-
         do {
             move = rand() % 4;
             associate_move_to_bloc(p->black_bloc, move, &move_lig, &move_col);
@@ -182,4 +189,38 @@ void randomize_plateau(Plateau *p) {
 
     }
 
+}
+
+/**
+ * The function gives the row and the column of the cell of the grid the player clicked on.
+ * The function does not change x and y if the player is not on a cell.
+ *
+ * @warning This function must be used after the player clicked on the p
+ * @param p Grid to check in
+ * @param x x coordinate (not row)
+ * @param y y coordinate (not column)
+ * @return 1 if the player clicked in a cell, 0 otherwise
+ */
+int from_coordinates_to_cell_index(Plateau *p, int *x, int *y) {
+    int inter_x, inter_y;
+
+    /* coordinates not inside the board */
+    if (!((0 <= *x && *x <= 512) &&
+          (0 <= *y && *y <= 512))) {
+        return 0;
+    }
+
+    inter_x = *x / (512 / 4);
+    inter_y = *y / (512 / 4);
+
+    /* If inside the p, double check if the row and column are correct for the grid's array */
+    if (!((0 <= inter_x && inter_x < 4) &&
+          (0 <= inter_y && inter_y < 4))) {
+        return 0;
+    }
+
+    *x = inter_x;
+    *y = inter_y;
+
+    return 1;
 }

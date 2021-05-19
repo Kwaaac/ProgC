@@ -2,8 +2,8 @@
 #define TP11_IMAGE_H
 #define IMG_PATH "data/"
 
-#include <MLV/MLV_image.h>
+#include <MLV/MLV_all.h>
 
-void split_images( const char *filename, MLV_Image *image, int lig, int col);
+void split_images(const char *filename, MLV_Image *image, int lig, int col);
 
 #endif /*TP11_IMAGE_H*/
