@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include "dames.h"
 #include "graphic.h"
-#include <MLV/MLV_all.h>
 
 int main() {
     unsigned long int n = 0;
@@ -15,9 +14,13 @@ int main() {
     while (!is_bord_full(n) && queen_size <= 7) {
         MLV_wait_mouse(&mouse_x, &mouse_y);
 
-        if (from_coordinates_to_cell_index(&mouse_y, &mouse_x) && is_queen_placeable(n, mouse_x, mouse_y)) {
-            set_cells_queen(&n, queens, &queen_size, mouse_x, mouse_y);
+        if (from_coordinates_to_cell_index(&mouse_y, &mouse_x)) {
+            if (is_queen_placeable(n, mouse_x, mouse_y)) {
+                set_cells_queen(&n, queens, &queen_size, mouse_x, mouse_y);
+            }
         }
+        draw_board(n, queens, queen_size, 640 / 8);
+        print_bord_command_line(n);
     }
 
     if (queen_size <= 7) {

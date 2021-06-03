@@ -1,14 +1,31 @@
+# Squelette de Makefile
+
+# Définition des variables
 CC=gcc
-CFLAGS=-Wall -ansi -pedantic-errors -lMLV
-DEPS=bit.h dames.h graphic.h $(shell pkg-config --libs-only-l MLV)
-OBJ=dames.o bit.o graphic.o main.o
+CFLAGS=-Wall -ansi -lMLV
+OBJ=main.o bit.o dames.o graphic.o
 
-%.o: %.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
+# Compilation des fichiers
+but : $(OBJ)
+	$(CC) -o main.out $(OBJ) $(CFLAGS)
 
-dames: main.o $(OBJ)
-	gcc -o $@ $^ $(LDFLAGS)
+main.o : main.c dames.h graphic.h
+	$(CC) -c main.c $(CFLAGS)
 
-.PHONY: clean
-clean:
-	rm -f $(OBJ) dames
+dames.o : dames.c dames.h bit.h
+	$(CC) -c dames.c $(CFLAGS)
+
+bit.o : bit.c bit.h
+	$(CC) -c bit.c $(CFLAGS)
+
+graphic.o : graphic.c graphic.h bit.h
+	$(CC) -c graphic.c $(CFLAGS)
+
+# Pour nettoyer le répertoire des fichiers encombrants
+clean :
+	rm *.o
+	rm main.out
+
+# Exécuter le programme
+run : main.out
+	./main.out

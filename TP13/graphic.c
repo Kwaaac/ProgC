@@ -16,20 +16,20 @@ int in_array(int tab[], int elt, int size) {
 void draw_board(unsigned long int n, int queens[], int queen_size, int cell_size) {
     int i, j, position;
     MLV_Color color;
-    MLV_Image *image = MLV_load_image("queen");
+    MLV_Image *image = MLV_load_image("queen.png");
     MLV_resize_image(image, cell_size, cell_size);
 
     for (i = 0; i < 8; i++) {
         for (j = 0; j < 8; j++) {
-            position = i * 8 + j;
+            position = (7-i) * 8 + (7-j);
             if (bit_value_ULI(n, position)) {
-                if (j % 2 == 0) {
-                    color = MLV_COLOR_RED1;
-                } else {
+                if ((i + j) % 2 == 0) {
                     color = MLV_COLOR_RED4;
+                } else {
+                    color = MLV_COLOR_RED1;
                 }
             } else {
-                if (j % 2 == 0) {
+                if ((i + j) % 2 == 0) {
                     color = MLV_COLOR_BLACK;
                 } else {
                     color = MLV_COLOR_GRAY;
@@ -48,7 +48,7 @@ void draw_board(unsigned long int n, int queens[], int queen_size, int cell_size
 
 
     }
-
+    MLV_actualise_window();
 }
 
 /**
@@ -63,14 +63,16 @@ void draw_board(unsigned long int n, int queens[], int queen_size, int cell_size
 int from_coordinates_to_cell_index(int *x, int *y) {
     int inter_x, inter_y;
 
+
     /* coordinates not inside the board */
     if (!((0 <= *x && *x <= 640) &&
           (0 <= *y && *y <= 640))) {
         return 0;
     }
 
-    inter_x = *x / (640 / 8);
-    inter_y = *y / (640 / 8);
+    inter_x = 7 - (*x / (640 / 8));
+    inter_y = 7 - (*y / (640 / 8));
+
 
     /* If inside the p, double check if the row and column are correct for the grid's array */
     if (!((0 <= inter_x && inter_x < 8) &&

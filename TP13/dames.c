@@ -55,8 +55,10 @@ int is_bord_full(unsigned long int n) {
  * @return 1 if the queen can be placed, 0 otherwise
  */
 int is_queen_placeable(unsigned long int n, int x, int y) {
+
     int position = convert_xy_to_bit_position(x, y);
-    return bit_value_ULI(n, position);
+    printf("%d\n", position);
+    return !bit_value_ULI(n, position);
 }
 
 int stop_diago_left(int position, int next_position) {
@@ -118,7 +120,6 @@ void set_column(unsigned long int *n, int position) {
  * @param position The position of the queen
  */
 void set_diagonals(unsigned long int *n, int position) {
-    int i;
     /*First diagonal*/
     set_cells(n, position, 0, 64, 9, stop_diago_left);
 
