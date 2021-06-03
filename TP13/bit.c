@@ -5,7 +5,7 @@
 void print_ULI(unsigned long int n) {
     int i;
     for (i = CHAR_BIT * 8 - 1; i >= 0; i--) {
-        printf("%c", (n >> i) & 1 ? '1' : '0');
+        printf("%d", bit_value_ULI(n, i));
     }
     printf("\n");
 }
