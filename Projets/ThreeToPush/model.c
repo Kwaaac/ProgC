@@ -20,9 +20,7 @@ void print_liste(List list) {
 
     token = list.last_element->next;
 
-
     while (!equals_tokens(token, list.last_element)) {
-
         token = token->next;
     }
 }
