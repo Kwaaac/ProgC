@@ -5,9 +5,10 @@
 #include "board.h"
 
 void print_board_command_line(Plateau *p);
-void print_carre_command_line(Carre* c);
 
-void update_board(Plateau *p)
+void print_carre_command_line(Carre *c);
+
+void update_board(Plateau *p);
 
 
 #endif /* TP11_DISPLAY_H */

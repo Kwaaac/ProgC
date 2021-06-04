@@ -1,7 +1,8 @@
 CC=gcc
-CFLAGS=-Wall -ansi -pedantic-errors -lMLV
-DEPS=board.h display.h image.h $(shell pkg-config --libs-only-l MLV)
-OBJ=main.o board.o display.o image.o
+CFLAGS=-Wall -ansi -pedantic-errors
+LDFLAGS= -lMLV
+DEPS=board.h display.h
+OBJ=main.o board.o display.o
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)

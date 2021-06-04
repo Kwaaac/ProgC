@@ -1,6 +1,7 @@
 #include "board.h"
 #include <stdlib.h>
 #include <assert.h>
+#include "display.h"
 
 Carre *init_bloc(int col, int lig) {
     Carre *new_bloc = (Carre *) malloc(sizeof(Carre));
@@ -34,16 +35,16 @@ Plateau *allocate_plateau(MLV_Image *image, int height, int width) {
     int img_height = MLV_get_image_height(image) / height;
     MLV_Image *tmp;
 
-    Plateau *p = (Plateau *) malloc(sizeof(Plateau));
+    Plateau *p = (Plateau *) calloc(1, sizeof(Plateau));
     assert(p != NULL);
 
     p->width = width;
     p->height = height;
 
-    p->bloc = (Carre **) malloc(sizeof(Carre *) * height);
+    p->bloc = (Carre **) calloc(height, sizeof(Carre *));
 
     for (i = 0; i < height; i++) {
-        p->bloc[i] = (Carre *) malloc(sizeof(Carre) * width);
+        p->bloc[i] = (Carre *) calloc(width, sizeof(Carre));
     }
 
     p->solution = image;
@@ -145,7 +146,7 @@ Carre *swap_blocs(Carre *black_bloc, Carre *c2) {
 }
 
 int is_out_of_bound(Plateau *p, int lig, int col) {
-    return lig < p->height && lig > 0 && col < p->width && col > 0;
+    return lig < p->height && lig >= 0 && col < p->width && col >= 0;
 }
 
 void associate_move_to_bloc(Carre *black_bloc, int move, int *move_lig, int *move_col) {
@@ -178,6 +179,8 @@ void associate_move_to_bloc(Carre *black_bloc, int move, int *move_lig, int *mov
 
 void randomize_plateau(Plateau *p) {
     int i, move, move_lig, move_col;
+    update_board(p);
+    MLV_wait_milliseconds(1000);
     for (i = 0; i < MOVE_NBR; i++) {
         do {
             move = rand() % 4;
@@ -185,7 +188,9 @@ void randomize_plateau(Plateau *p) {
 
         } while (!is_out_of_bound(p, move_lig, move_col));
 
+        MLV_wait_milliseconds(35);
         p->black_bloc = swap_blocs(p->black_bloc, &p->bloc[move_lig][move_col]);
+        update_board(p);
 
     }
 

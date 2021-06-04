@@ -16,6 +16,8 @@ void update_board(Plateau *p) {
     int img_width = MLV_get_image_width(p->solution) / p->width;
     int img_height = MLV_get_image_height(p->solution) / p->height;
 
+    MLV_clear_window(MLV_COLOR_BLACK);
+
     for (i = 0; i < p->height; i++) {
         for (j = 0; j < p->width; j++) {
             if (p->bloc[i][j].weight != p->black_bloc->weight) {
