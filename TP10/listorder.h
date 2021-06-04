@@ -1,3 +1,7 @@
+/*! \file listorder.h
+    \brief File that contains the methods associated with the chained list and the comparison of it's elements
+*/
+
 #ifndef TP10_LISTORDER_H
 #define TP10_LISTORDER_H
 

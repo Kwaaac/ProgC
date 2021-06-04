@@ -26,7 +26,7 @@ int fread_list(const char *file, List *list) {
         age = atoi(strtok(NULL, " "));
 
         cell = allocate_cell(first, last, age);
-        
+
         ordered_insertion(list, cell, compare_age_then_name);
     }
     fclose(f);

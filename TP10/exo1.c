@@ -4,7 +4,7 @@
 /**
  * Function that swap byte per bytes
  *
- * @param z1 
+ * @param z1
  * @param z2
  * @param size
  */

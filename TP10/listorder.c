@@ -1,3 +1,6 @@
+/*! \file listorder.h
+    \brief File that implement \headerfile listorder.h
+*/
 #include <assert.h>
 #include "listorder.h"
 #include "in_out.h"
@@ -110,10 +113,15 @@ void print_list(List list) {
     }
 }
 
-int main() {
+int main(int argc, char *argv[]) {
     List list = NULL;
 
-    fread_list("../liste_nom.txt", &list);
+    if(argc < 1){
+        printf("Missing file arguments");
+        return 1;
+    }
+
+    fread_list(argv[1], &list);
 
     print_list(list);
 

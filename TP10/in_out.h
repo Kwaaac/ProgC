@@ -1,3 +1,7 @@
+/*! \file in_out.h
+    \brief Only uses a function that read a file a add elements to a List
+*/
+
 #ifndef TP10_IN_OUT_H
 #define TP10_IN_OUT_H
 
@@ -11,6 +15,6 @@
  * @param list The list for every person to be added
  * @return
  */
-int fread_list(const char *file, Cell **list);
+int fread_list(const char *file, List *list);
 
 #endif /*TP10_IN_OUT_H*/

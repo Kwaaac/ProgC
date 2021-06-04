@@ -9,6 +9,9 @@ OBJ=listorder.o in_out.o
 tp10: listorder.o $(OBJ)
 	gcc -o $@ $^ $(CFLAGS)
 
+doc:
+	@doxygen Doxyfile
+
 .PHONY: clean
 clean:
-	rm -f $(OBJ) main
+	rm -rf $(OBJ) tp10 tp10.o doc
