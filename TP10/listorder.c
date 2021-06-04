@@ -58,31 +58,29 @@ int compare_name_then_age(Cell *p1, Cell *p2) {
 }
 
 
-Cell *ordered_insertion(Cell *list, Cell *new, int order_func(Cell *, Cell *)) {
+void ordered_insertion(List *list, Cell *new, int order_func(Cell *, Cell *)) {
     Cell *pred;
 
-    if (list == NULL) {
-        list = new;
-        return list;
+    if ((*list) == NULL) {
+        *list = new;
+        return;
     }
 
-    if (order_func(list, new) > 0) {
-        new->next = list;
-        list = new;
-        return list;
+    if (order_func((*list), new) > 0) {
+        new->next = (*list);
+        (*list) = new;
+        return;
     }
 
     /* We catch the the good position of our new element in the list */
-    for (pred = list;
+    for (pred = (*list);
          pred->next != NULL && !(order_func(pred, new) <= 0 && order_func(pred->next, new) >= 0); pred = pred->next);
 
     new->next = pred->next;
     pred->next = new;
-
-    return list;
 }
 
-void free_list(Cell *list) {
+void free_list(List list) {
     if (list->next != NULL) {
         free_list(list->next);
     }
@@ -98,7 +96,7 @@ void print_cell(Cell *cell) {
     printf("Age: %d yrs\n", cell->age);
 }
 
-void print_list(Cell *list) {
+void print_list(List list) {
     Cell *ptr = list;
 
     if (ptr == NULL) {
@@ -113,7 +111,7 @@ void print_list(Cell *list) {
 }
 
 int main() {
-    Cell *list = NULL;
+    List list = NULL;
 
     fread_list("../liste_nom.txt", &list);
 

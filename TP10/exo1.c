@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 
 void swap_memory(void *z1, void *z2, size_t size) {
     char tmp;
@@ -9,7 +11,7 @@ void swap_memory(void *z1, void *z2, size_t size) {
     for (i = 0; i < size; i++) {
         tmp = mem1[i];
         mem1[i] = mem2[i];
-        mem2[i] = temp;
+        mem2[i] = tmp;
     }
 }
 

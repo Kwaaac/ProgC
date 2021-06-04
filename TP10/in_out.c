@@ -2,7 +2,7 @@
 
 #include "in_out.h"
 
-int fread_list(const char *file, Cell **list) {
+int fread_list(const char *file, List *list) {
     FILE *f;
     Cell *cell;
 
@@ -19,19 +19,16 @@ int fread_list(const char *file, Cell **list) {
     }
 
     while (fgets(str, MAX_READ, f) != NULL) {
-
         strcpy(tmp, str);
 
         first = strtok(tmp, " ");
         last = strtok(NULL, " ");
         age = atoi(strtok(NULL, " "));
-        
+
         cell = allocate_cell(first, last, age);
-
-        *list = ordered_insertion(*list, cell, compare_age_then_name);
+        
+        ordered_insertion(list, cell, compare_age_then_name);
     }
-
     fclose(f);
-
     return 0;
 }
