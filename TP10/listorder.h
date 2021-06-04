@@ -46,4 +46,4 @@ void print_cell(Cell* cell);
 /* Free the whole list */
 void free_list(Cell* list);
 
-#endif //TP10_LISTORDER_H
+#endif /*TP10_LISTORDER_H*/

@@ -1,8 +1,10 @@
+#include <assert.h>
 #include "listorder.h"
 #include "in_out.h"
 
 Cell *allocate_cell(char *first, char *last, int age) {
-    Cell *cell = (Cell *) malloc(sizeof(Cell));
+    Cell *cell = (Cell *) calloc(1, sizeof(Cell));
+    assert(cell != NULL);
 
     cell->first_name = (char *) malloc((strlen(first) + 1) * sizeof(char));
     strcpy(cell->first_name, first);
@@ -80,11 +82,13 @@ Cell *ordered_insertion(Cell *list, Cell *new, int order_func(Cell *, Cell *)) {
     return list;
 }
 
-
 void free_list(Cell *list) {
     if (list->next != NULL) {
         free_list(list->next);
     }
+
+    free(list->last_name);
+    free(list->first_name);
     free(list);
 }
 
@@ -95,12 +99,16 @@ void print_cell(Cell *cell) {
 }
 
 void print_list(Cell *list) {
-    if (list != NULL) {
-        print_cell(list);
+    Cell *ptr = list;
+
+    if (ptr == NULL) {
+        return;
     }
 
-    if (list->next != NULL) {
-        print_list(list->next);
+    print_cell(ptr);
+
+    if (ptr->next != NULL) {
+        print_list(ptr->next);
     }
 }
 
@@ -110,6 +118,8 @@ int main() {
     fread_list("../liste_nom.txt", &list);
 
     print_list(list);
+
+    free_list(list);
 
     return 0;
 }
