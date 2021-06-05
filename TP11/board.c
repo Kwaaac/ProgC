@@ -12,14 +12,10 @@ Carre *init_bloc(int col, int lig) {
     return new_bloc;
 }
 
-void free_bloc(Carre *c) {
-    free(c);
-}
-
 void free_bloc_array(Carre **c, int size) {
     int i;
     for (i = 0; i < size; i++) {
-        free_bloc(c[i]);
+        free(c[i]);
     }
     free(c);
 }
@@ -71,8 +67,8 @@ Plateau *allocate_plateau(MLV_Image *image, int height, int width) {
  * @param p the board
  */
 void free_plateau(Plateau *p) {
-    free_bloc_array(p->bloc, p->width);
-    free_bloc(p->black_bloc);
+    free_bloc_array(p->bloc, p->height);
+    MLV_free_image(p->solution);
     free(p);
 }
 
@@ -219,8 +215,8 @@ int from_coordinates_to_cell_index(Plateau *p, int *x, int *y) {
     inter_y = *y / (512 / 4);
 
     /* If inside the p, double check if the row and column are correct for the grid's array */
-    if (!((0 <= inter_x && inter_x < 4) &&
-          (0 <= inter_y && inter_y < 4))) {
+    if (!((0 <= inter_x && inter_x < p->height) &&
+          (0 <= inter_y && inter_y < p->width))) {
         return 0;
     }
 

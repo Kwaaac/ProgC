@@ -1,8 +1,27 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 #include <time.h>
 #include "board.h"
 #include "display.h"
+
+/**
+ * Compare the end of a string with the given end
+ *
+ * @param str the str the compare
+ * @param end the end
+ * @return 1 if they are equals, 0 otherwise
+ */
+int ends_with(char *str, char *end) {
+    size_t size_str = strlen(str);
+    size_t size_end = strlen(end);
+    if (size_end > size_str) {
+        return 0;
+    }
+
+    return strncmp(str + size_str - size_end, end, size_end) == 0;
+}
 
 int main(int argc, char *argv[]) {
     int mouse_x, mouse_y;
@@ -18,12 +37,22 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
+    if (!ends_with(argv[1], ".png") || !ends_with(argv[1], ".png") || !ends_with(argv[1], ".png")) {
+        printf("Wrong file format, \"%s\" is not a png, gif or jpg\n", argv[1]);
+        return 1;
+    }
+
+    if (access(argv[1], F_OK)) {
+        printf("The file does not exist: %s\n", argv[1]);
+        return 1;
+    }
+
     MLV_create_window("Taquin", "Taquin", 512, 512);
 
     image = MLV_load_image(argv[1]);
     p = allocate_plateau(image, 4, 4);
 
-    randomize_plateau(p);
+    /*randomize_plateau(p);*/
 
     update_board(p);
 
@@ -39,7 +68,6 @@ int main(int argc, char *argv[]) {
             MLV_actualise_window();
             MLV_wait_seconds(1);
             update_board(p);
-            break;
         }
 
         if (mouse_state == MLV_BUTTON_LEFT && from_coordinates_to_cell_index(p, &mouse_x, &mouse_y) &&

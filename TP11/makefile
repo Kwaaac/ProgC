@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-Wall -ansi -pedantic-errors
+CFLAGS=-Wall -Wextra -Werror -ansi -g -pedantic-errors -Wunreachable-code
 LDFLAGS= -lMLV
 DEPS=board.h display.h
 OBJ=main.o board.o display.o
@@ -19,8 +19,6 @@ doc: cleandoc
 	@echo "Creating documentation in doc/..."
 	@doxygen Doxyfile
 	@echo "Documentation created"
-
-
 
 .PHONY: clean
 clean:
