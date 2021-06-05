@@ -2,12 +2,12 @@
 
 # Définition des variables
 CC=gcc
-CFLAGS=-Wall -ansi -lMLV
+CFLAGS=-Wall -Wextra -Werror -ansi -lMLV -Wunreachable-code
 OBJ=main.o bit.o dames.o graphic.o
 
 # Compilation des fichiers
 but : $(OBJ)
-	$(CC) -o main.out $(OBJ) $(CFLAGS)
+	$(CC) -o tp13 $(OBJ) $(CFLAGS)
 
 main.o : main.c dames.h graphic.h
 	$(CC) -c main.c $(CFLAGS)
@@ -21,11 +21,16 @@ bit.o : bit.c bit.h
 graphic.o : graphic.c graphic.h bit.h
 	$(CC) -c graphic.c $(CFLAGS)
 
-# Pour nettoyer le répertoire des fichiers encombrants
-clean :
-	rm *.o
-	rm main.out
+cleandoc:
+	@echo "Cleaning documentation..."
+	@rm -rf doc
+	@echo "Documentation cleaned !"
 
-# Exécuter le programme
-run : main.out
-	./main.out
+doc: cleandoc
+	@echo "Creating documentation in doc/..."
+	@doxygen Doxyfile
+	@echo "Documentation created"
+
+.PHONY: clean
+clean:
+	rm -rf $(OBJ) tp13 tp13.o doc

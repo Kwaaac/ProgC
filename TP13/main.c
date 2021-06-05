@@ -15,8 +15,8 @@ int main() {
         MLV_wait_mouse(&mouse_x, &mouse_y);
 
         if (from_coordinates_to_cell_index(&mouse_y, &mouse_x)) {
-            if (is_queen_placeable(n, mouse_x, mouse_y)) {
-                set_cells_queen(&n, queens, &queen_size, mouse_x, mouse_y);
+            if (is_queen_placeable(n, mouse_y, mouse_x)) {
+                set_cells_queen(&n, queens, &queen_size, mouse_y, mouse_x);
             }
         }
         draw_board(n, queens, queen_size, 640 / 8);
@@ -24,9 +24,9 @@ int main() {
     }
 
     if (queen_size <= 7) {
-        printf("%s", "Pas de bol, c'est perdu");
+        printf("%s", "Pas de bol, c'est perdu\n");
     } else {
-        printf("%s", "Ho bravo c'est gagné !");
+        printf("%s", "Ho bravo c'est gagné !\n");
     }
 
     MLV_free_window();

@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <limits.h>
 #include "dames.h"
 #include "bit.h"
 
@@ -13,28 +12,32 @@ int convert_xy_to_bit_position(int x, int y) {
     return x * CHAR_BIT + y;
 }
 
-/**
- * Print every cell of the board in command line
- *
- * @param n the board
- */
-void print_bord_command_line(unsigned long int n) {
-    int i;
-    for (i = BOARD_LENGTH; i >= 0; i--) {
-        printf("%d ", bit_value_ULI(n, i));
-        if (i % (CHAR_BIT) == 0) {
-            printf("\n");
-        }
+int from_coordinates_to_cell_index(int *x, int *y) {
+    int inter_x, inter_y;
+
+    /* coordinates not inside the board */
+    if (!((0 <= *x && *x <= 640) &&
+          (0 <= *y && *y <= 640))) {
+        return 0;
     }
-    printf("\n");
+
+    inter_x = 7 - (*x / (640 / 8));
+    inter_y = 7 - (*y / (640 / 8));
+
+
+    /* If inside the p, double check if the row and column are correct for the grid's array */
+    if (!((0 <= inter_x && inter_x < 8) &&
+          (0 <= inter_y && inter_y < 8))) {
+        return 0;
+    }
+
+    *x = inter_x;
+    *y = inter_y;
+
+    return 1;
 }
 
-/**
- * Function that check if every cells are menaced by a queen
- *
- * @param n the board
- * @return 1 if every cell are menaced, 0 otherwise
- */
+
 int is_bord_full(unsigned long int n) {
     int i;
     for (i = BOARD_LENGTH; i >= 0; i--) {
@@ -46,14 +49,7 @@ int is_bord_full(unsigned long int n) {
     return 1;
 }
 
-/**
- * Inform if the queen can be placed at the given coordinates
- *
- * @param n The board
- * @param x The row of the coordinates
- * @param y The column of the coordinates
- * @return 1 if the queen can be placed, 0 otherwise
- */
+
 int is_queen_placeable(unsigned long int n, int x, int y) {
 
     int position = convert_xy_to_bit_position(x, y);
@@ -61,32 +57,17 @@ int is_queen_placeable(unsigned long int n, int x, int y) {
     return !bit_value_ULI(n, position);
 }
 
-int stop_diago_left(int position, int next_position) {
-    return position - ((int) position / 8) * 8 > next_position - ((int) next_position / 8) * 8;
-}
+void set_cells(unsigned long int *n, int position, int start_index, int min, int max, int delta) {
+    int i, pos_update;
 
-int stop_diago_right(int position, int next_position) {
-    return position - ((int) position / 8) * 8 < next_position - ((int) next_position / 8) * 8;
-}
-
-int line_and_column(int position, int next_position) {
-    return 0;
-}
-
-void set_cells(unsigned long int *n, int position, int min, int max, int delta, int func(int, int)) {
-    int i;
-    for (i = position; i < max; i = i + delta) {
-        if (func(position, i)) {
-            break;
-        }
-        set_positive_bit_ULI(n, i);
+    for (i = start_index, pos_update = position;
+         i < max && pos_update >= 0 && pos_update < 64; i++, pos_update = pos_update + delta) {
+        set_positive_bit_ULI(n, pos_update);
     }
 
-    for (i = position; i >= min; i = i - delta) {
-        if (func(i, position)) {
-            break;
-        }
-        set_positive_bit_ULI(n, i);
+    for (i = start_index, pos_update = position;
+         i >= min && pos_update >= 0 && pos_update < 64; i--, pos_update = pos_update - delta) {
+        set_positive_bit_ULI(n, pos_update);
     }
 }
 
@@ -97,10 +78,7 @@ void set_cells(unsigned long int *n, int position, int min, int max, int delta, 
  * @param position The position of the queen
  */
 void set_line(unsigned long int *n, int position) {
-    int min = CHAR_BIT * ((int) position / 8);
-    int max = CHAR_BIT * ((int) position / 8 + 1);
-
-    set_cells(n, position, min, max, 1, line_and_column);
+    set_cells(n, position, position % 8, 0, 8, 1);
 }
 
 /**
@@ -110,7 +88,7 @@ void set_line(unsigned long int *n, int position) {
  * @param position The position of the queen
  */
 void set_column(unsigned long int *n, int position) {
-    set_cells(n, position, 0, 64, 8, line_and_column);
+    set_cells(n, position, position / 8, 0, 64, 8);
 }
 
 /**
@@ -121,10 +99,10 @@ void set_column(unsigned long int *n, int position) {
  */
 void set_diagonals(unsigned long int *n, int position) {
     /*First diagonal*/
-    set_cells(n, position, 0, 64, 9, stop_diago_left);
+    set_cells(n, position, position % 8, 0, 8, 9);
 
     /*Second diagonal*/
-    set_cells(n, position, 0, 64, 7, stop_diago_right);
+    set_cells(n, position, position % 8, 0, 8, -7);
 }
 
 void set_cells_queen(unsigned long int *n, int queens[], int *queen_size, int x, int y) {
