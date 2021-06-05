@@ -1,6 +1,6 @@
 /*!
  * \file hash.h
- * \brief File that function
+ * \brief File that contains function for the hashtable structure
  *
  */
 
@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+
 
 typedef struct node {
     char *word;

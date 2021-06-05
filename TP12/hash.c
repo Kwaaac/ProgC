@@ -1,11 +1,6 @@
 #include "hash.h"
 
-/**
- * Allocate a link
- *
- * @param word The word to add to the structure, already allocated
- * @return The new allocated link
- */
+
 link *allocate_link(char *word) {
     link *lnk = (link *) malloc(sizeof(link));
     lnk->word = malloc(strlen(word) + 1);
@@ -50,11 +45,6 @@ void free_list(list *list) {
     free(list);
 }
 
-/**
- * Allocate a list
- *
- * @return An empty list
- */
 list *allocate_list() {
     list *lst = (list *) malloc(sizeof(list));
     lst->size = 0;
@@ -87,13 +77,6 @@ void add_word_table(hashtable *tab, char word[]) {
     tab->size++;
 }
 
-/**
- * Fetch the link in the list whose word equals the given word.
- *
- * @param node list of link
- * @param word the word to compare
- * @return The link that contains the word, null otherwise
- */
 link *find_word(list *list, char *word) {
     link *ptr;
 
@@ -108,12 +91,6 @@ link *find_word(list *list, char *word) {
     return ptr;
 }
 
-/**
- * Insert a new link at the first position of the given list of nodes.
- *
- * @param lst link list
- * @param word word to create a new link
- */
 list *insert_first_list(list *lst, char *word) {
     link *lnk;
     if (lst == NULL) {

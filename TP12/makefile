@@ -10,6 +10,16 @@ OBJ=hash.o in_out.o
 tp12: main.o $(OBJ)
 	gcc -o $@ $^ $(LDFLAGS)
 
+cleandoc:
+	@echo "Cleaning documentation..."
+	@rm -rf doc
+	@echo "Documentation cleaned !"
+
+doc: cleandoc
+	@echo "Creating documentation in doc/..."
+	@doxygen Doxyfile
+	@echo "Documentation created"
+
 .PHONY: clean
 clean:
 	rm -f $(OBJ) tp12 main.o

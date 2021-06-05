@@ -2,15 +2,18 @@
 #include "in_out.h"
 
 int main(int argc, char *argv[]) {
+    FILE *f;
+    hashtable *hash;
+
     if (argc == 1) {
         printf("Missing file arguments\n");
         return 1;
     }
 
-    FILE *f = fopen(argv[1], "r");
+    f = fopen(argv[1], "r");
 
     /*list *lst = read_text_linked_list(f);*/
-    hashtable *hash = read_text_hashtable(f);
+    hash = read_text_hashtable(f);
 
     printf("%d words found in %s.\n", hash->size, argv[1]);
 
