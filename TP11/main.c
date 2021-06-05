@@ -13,7 +13,12 @@ int main(int argc, char *argv[]) {
     Plateau *p;
     srand(time(NULL));
 
-    MLV_create_window("viv", "bob", 512, 512);
+    if (argc == 1) {
+        printf("Missing file arguments\n");
+        return 1;
+    }
+
+    MLV_create_window("Taquin", "Taquin", 512, 512);
 
     image = MLV_load_image(argv[1]);
     p = allocate_plateau(image, 4, 4);
@@ -34,6 +39,7 @@ int main(int argc, char *argv[]) {
             MLV_actualise_window();
             MLV_wait_seconds(1);
             update_board(p);
+            break;
         }
 
         if (mouse_state == MLV_BUTTON_LEFT && from_coordinates_to_cell_index(p, &mouse_x, &mouse_y) &&
@@ -49,6 +55,8 @@ int main(int argc, char *argv[]) {
 
     }
 
-    free(p);
+    printf("%s\n", "Et c'est gagné !");
+
+    free_plateau(p);
     return 0;
 }

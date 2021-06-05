@@ -10,6 +10,18 @@ OBJ=main.o board.o display.o
 taquin: main.o $(OBJ)
 	gcc -o $@ $^ $(LDFLAGS)
 
+cleandoc:
+	@echo "Cleaning documentation..."
+	@rm -rf doc
+	@echo "Documentation cleaned !"
+
+doc: cleandoc
+	@echo "Creating documentation in doc/..."
+	@doxygen Doxyfile
+	@echo "Documentation created"
+
+
+
 .PHONY: clean
 clean:
-	rm -f $(OBJ) main
+	rm -rf $(OBJ) taquin doc

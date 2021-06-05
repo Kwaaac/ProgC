@@ -115,12 +115,12 @@ link *find_word(list *list, char *word) {
  * @param word word to create a new link
  */
 list *insert_first_list(list *lst, char *word) {
-
+    link *lnk;
     if (lst == NULL) {
         lst = allocate_list();
     }
 
-    link *lnk = allocate_link(word);
+    lnk = allocate_link(word);
     lnk->next = lst->first;
     lst->first = lnk;
     lst->size++;

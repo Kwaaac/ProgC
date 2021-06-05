@@ -116,8 +116,8 @@ void print_list(List list) {
 int main(int argc, char *argv[]) {
     List list = NULL;
 
-    if(argc < 1){
-        printf("Missing file arguments");
+    if (argc == 1) {
+        printf("Missing file arguments\n");
         return 1;
     }
 

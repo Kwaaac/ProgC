@@ -7,6 +7,12 @@
 #include <stdlib.h>
 #include "hash.h"
 
+/**
+ *  First iteration of the first exercice
+ *
+ * @param infile
+ * @return
+ */
 list *read_text_linked_list(FILE *infile);
 
 hashtable *read_text_hashtable(FILE *infile);

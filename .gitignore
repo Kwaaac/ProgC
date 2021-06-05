@@ -56,6 +56,8 @@ dkms.conf
 */cmake-build-debug/*
 *.idea
 
+doc
+
 cmake-build-debug-wsl
 
 Projets/ThreeToPush/cmake-build-debug/

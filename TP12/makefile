@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-Wall -ansi -g -pedantic-errors
+CFLAGS=-Wall -Wextra -Werror -ansi -g -pedantic-errors
 LDFLAGS=-lm
 DEPS=hash.h in_out.
 OBJ=hash.o in_out.o

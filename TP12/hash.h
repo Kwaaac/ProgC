@@ -1,3 +1,8 @@
+/*!
+ * \file hash.h
+ * \brief File that function
+ *
+ */
 
 #ifndef TP12_HASH_H
 #define TP12_HASH_H
@@ -29,8 +34,18 @@ typedef struct _hashtable {
  */
 list *allocate_list();
 
+/**
+ * Allocate a new hashtable
+ *
+ * @return A new allocated hash_table
+ */
 hashtable *allocate_hash_table();
 
+/**
+ * Free a hash_table
+ *
+ * @param hash_table The hash table to be freed
+ */
 void free_hash_table(hashtable *hash_table);
 
 void add_word_table(hashtable *tab, char word[]);
@@ -59,7 +74,12 @@ link *find_word(list *list, char *word);
  */
 list *insert_first_list(list *lst, char *word);
 
-
+/**
+ * Count every distinct word in the given hashtable
+ *
+ * @param hash The given hashtable
+ * @return The count of the distinct words
+ */
 int count_distinc_word(hashtable *hash);
 
 

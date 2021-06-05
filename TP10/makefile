@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-Wall -ansi -pedantic-errors
+CFLAGS=-Wall -Wextra -Werror -ansi -g -pedantic-errors
 DEPS=listorder.h in_out.h
 OBJ=listorder.o in_out.o
 
@@ -9,8 +9,15 @@ OBJ=listorder.o in_out.o
 tp10: listorder.o $(OBJ)
 	gcc -o $@ $^ $(CFLAGS)
 
-doc:
+cleandoc:
+	@echo "Cleaning documentation..."
+	@rm -rf doc
+	@echo "Documentation cleaned !"
+
+doc: cleandoc
+	@echo "Creating documentation in doc/..."
 	@doxygen Doxyfile
+	@echo "Documentation created"
 
 .PHONY: clean
 clean:
