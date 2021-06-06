@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    if (!ends_with(argv[1], ".png") || !ends_with(argv[1], ".png") || !ends_with(argv[1], ".png")) {
+    if (!ends_with(argv[1], ".png") || !ends_with(argv[1], ".gif") || !ends_with(argv[1], ".jpg")) {
         printf("Wrong file format, \"%s\" is not a png, gif or jpg\n", argv[1]);
         return 1;
     }
@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
     image = MLV_load_image(argv[1]);
     p = allocate_plateau(image, 4, 4);
 
-    /*randomize_plateau(p);*/
+    randomize_plateau(p);
 
     update_board(p);
 
