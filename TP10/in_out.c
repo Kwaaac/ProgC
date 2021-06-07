@@ -2,12 +2,11 @@
 
 #include "in_out.h"
 
-int fread_list(const char *file, List *list) {
+int fread_list(const char *file, List *list, const char *delimiter) {
     FILE *f;
     Cell *cell;
 
     char str[MAX_READ];
-    char tmp[MAX_READ];
 
     char *first, *last;
     int age;
@@ -15,15 +14,14 @@ int fread_list(const char *file, List *list) {
     f = fopen(file, "r");
     if (f == NULL) {
         fprintf(stderr, "Erreur d'ouverture du fichier %s\n", file);
-        return 0;
+        exit(0);
     }
 
     while (fgets(str, MAX_READ, f) != NULL) {
-        strcpy(tmp, str);
 
-        first = strtok(tmp, " ");
-        last = strtok(NULL, " ");
-        age = atoi(strtok(NULL, " "));
+        first = strtok(str, delimiter);
+        last = strtok(NULL, delimiter);
+        age = atoi(strtok(NULL, delimiter));
 
         cell = allocate_cell(first, last, age);
 

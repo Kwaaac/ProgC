@@ -115,13 +115,33 @@ void print_list(List list) {
 
 int main(int argc, char *argv[]) {
     List list = NULL;
+    char *delimiter = " ";
 
     if (argc == 1) {
-        printf("Missing file arguments\n");
+        printf("Missing file arguments, use --help to know how to use the program\n");
         return 1;
     }
 
-    fread_list(argv[1], &list);
+    if (argc == 2) {
+        if (strcmp(argv[1], "--help") == 0) {
+            printf("\nThis program must be use with at least a correct file. Note that we consider you using the good format and the good delimiters to your files:\n"
+                   "./tp10 <file_name>\n"
+                   "\t--help : print this help section\n"
+                   "\t--delimiter <delimiter> : Use the delimiter between string in the file to slit the lines.\n\n");
+            return 1;
+        }
+    }
+
+    if (argc == 4) {
+        if ((strcmp(argv[2], "--delimiter") == 0)) {
+            delimiter = argv[3];
+        } else {
+            printf("Wrong arguments\n");
+            return 1;
+        }
+    }
+
+    fread_list(argv[1], &list, delimiter);
 
     print_list(list);
 

@@ -15,6 +15,6 @@
  * @param list The list for every person to be added
  * @return
  */
-int fread_list(const char *file, List *list);
+int fread_list(const char *file, List *list, const char *delimiter);
 
 #endif /*TP10_IN_OUT_H*/
