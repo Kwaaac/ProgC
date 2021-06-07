@@ -10,8 +10,22 @@
 
 #define BOARD_LENGTH CHAR_BIT * 8 - 1
 
+/**
+ * Print the board in the standard output
+ *
+ * @param n The board
+ */
 void print_bord_command_line(unsigned long int n);
 
+/**
+ * Convert the given x, y position to place the queen on the board and in the array of queens
+ *
+ * @param n The board
+ * @param queens The array of places queens
+ * @param queen_size The size of the array
+ * @param x row of the queen
+ * @param y column of the queen
+ */
 void set_cells_queen(unsigned long int *n, int queens[], int *queen_size, int x, int y);
 
 /**

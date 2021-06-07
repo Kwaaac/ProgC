@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-Wall -Wextra -Werror -ansi -g -pedantic-errors
+CFLAGS=-Wall -Wextra -Werror -ansi -g -pedantic-errors -Wunreachable-code
 DEPS=listorder.h in_out.h
 OBJ=listorder.o in_out.o
 

@@ -3,14 +3,7 @@
 #include <assert.h>
 #include "display.h"
 
-Carre *init_bloc(int col, int lig) {
-    Carre *new_bloc = (Carre *) malloc(sizeof(Carre));
 
-    new_bloc->col = col;
-    new_bloc->lig = lig;
-
-    return new_bloc;
-}
 
 void free_bloc_array(Carre **c, int size) {
     int i;

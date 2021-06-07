@@ -57,16 +57,24 @@ int is_queen_placeable(unsigned long int n, int x, int y) {
     return !bit_value_ULI(n, position);
 }
 
-void set_cells(unsigned long int *n, int position, int start_index, int min, int max, int delta) {
+/**
+ * This function will update every bits to 1 corresponding to the parameters
+ *
+ * @param n The board
+ * @param position The actual position of the queen
+ * @param start_index The starting index (either row or column)
+ * @param delta The next position of the bit
+ */
+void set_cells(unsigned long int *n, int position, int start_index, int delta) {
     int i, pos_update;
 
     for (i = start_index, pos_update = position;
-         i < max && pos_update >= 0 && pos_update < 64; i++, pos_update = pos_update + delta) {
+         i < 8 && pos_update >= 0 && pos_update < 64; i++, pos_update = pos_update + delta) {
         set_positive_bit_ULI(n, pos_update);
     }
 
     for (i = start_index, pos_update = position;
-         i >= min && pos_update >= 0 && pos_update < 64; i--, pos_update = pos_update - delta) {
+         i >= 0 && pos_update >= 0 && pos_update < 64; i--, pos_update = pos_update - delta) {
         set_positive_bit_ULI(n, pos_update);
     }
 }
@@ -78,31 +86,31 @@ void set_cells(unsigned long int *n, int position, int start_index, int min, int
  * @param position The position of the queen
  */
 void set_line(unsigned long int *n, int position) {
-    set_cells(n, position, position % 8, 0, 8, 1);
+    set_cells(n, position, position % 8, 1);
 }
 
 /**
- * Set every bits of the board to 1 on the line of the given position
+ * Set every bits of the board to 1 on the column of the given position
  *
  * @param n The board
  * @param position The position of the queen
  */
 void set_column(unsigned long int *n, int position) {
-    set_cells(n, position, position / 8, 0, 64, 8);
+    set_cells(n, position, position / 8, 8);
 }
 
 /**
- * Set every bits of the board to 1 on the line of the given position
+ * Set every bits of the board to 1 on the diagonals of the given position
  *
  * @param n The board
  * @param position The position of the queen
  */
 void set_diagonals(unsigned long int *n, int position) {
     /*First diagonal*/
-    set_cells(n, position, position % 8, 0, 8, 9);
+    set_cells(n, position, position % 8, 9);
 
     /*Second diagonal*/
-    set_cells(n, position, position % 8, 0, 8, -7);
+    set_cells(n, position, position % 8, -7);
 }
 
 void set_cells_queen(unsigned long int *n, int queens[], int *queen_size, int x, int y) {
